@@ -1,21 +1,29 @@
 package howtopass.baas.service.impl;
 
+import howtopass.baas.dao.ExamDAO;
 import howtopass.baas.domain.Exam;
 import howtopass.baas.service.ExamService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class ExamServiceImpl implements ExamService {
 
+    @Autowired
+    ExamDAO examDAO;
+
+    @Transactional
     @Override
     public List<Exam> search(Exam exam){
-        return null;
+        return examDAO.searchExam(exam);
     }
 
+    @Transactional
     @Override
-    public void add(Exam exam){
-
+    public Integer add(Exam exam){
+        return examDAO.addExam(exam);
     }
 }

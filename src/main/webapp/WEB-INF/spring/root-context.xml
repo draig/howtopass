@@ -15,6 +15,6 @@
 	<context:component-scan base-package="howtopass.baas.service" />
 	
 	<!-- Файл с настройками ресурсов для работы с данными (Data Access Resources) -->
-	<!--<import resource="data.xml" />-->
+	<import resource="data.xml" />
 
 </beans>

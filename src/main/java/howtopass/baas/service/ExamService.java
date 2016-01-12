@@ -8,5 +8,5 @@ public interface ExamService {
 
     public List<Exam> search(Exam exam);
 
-    public void add(Exam exam);
+    public Integer add(Exam exam);
 }

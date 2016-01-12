@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ExamDAO {
 
-    public void addExam(Exam exam);
+    public Integer addExam(Exam exam);
 
     public List<Exam> searchExam(Exam exam);
 }

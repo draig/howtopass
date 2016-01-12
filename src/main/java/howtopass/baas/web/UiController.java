@@ -13,10 +13,20 @@ import java.util.List;
  * Created by Andrew on 1/8/2016.
  */
 @Controller
-public class IndexController {
+public class UiController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
         return "index";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String searchPage() {
+        return "search";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String search() {
+        return "search";
     }
 }

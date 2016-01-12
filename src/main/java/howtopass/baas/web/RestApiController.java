@@ -18,12 +18,12 @@ public class RestApiController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public @ResponseBody List<Exam> search(@RequestBody Exam searchExam) {
-        return null;
+        return examService.search(searchExam);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void add(@RequestBody Exam searchExam) {
-
+    public void add(@RequestBody Exam exam) {
+        examService.add(exam);
     }
 }
