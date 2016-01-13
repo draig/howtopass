@@ -26,7 +26,8 @@ public class UiController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String search() {
-        return "search";
+    public String search(@RequestBody Exam exam) {
+        System.out.println(exam);
+        return "index";
     }
 }
