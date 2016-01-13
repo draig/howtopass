@@ -12,6 +12,7 @@ var HowToPass = {
         //this.citySelect = $('select#city');
         //this.universitySelect = $('select#university');
         this.facultySelect = $('select#faculty');
+        this.searchBtn = $('#search');
 
         this.facultySelect.append(this.emptyOption);
         HowToPass.data.faculties.forEach(function(country){
@@ -36,6 +37,10 @@ var HowToPass = {
             });
             scope.universitySelect.removeAttr('disabled');
         });*/
+
+        this.searchBtn.click(function() {
+
+        });
     },
 
     _disabledFrom: function(select) {
