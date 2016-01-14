@@ -8,15 +8,19 @@ var HowToPass = {
     },
 
     render: function() {
-        //this.countrySelect = $('select#country');
-        //this.citySelect = $('select#city');
-        //this.universitySelect = $('select#university');
+        this.countrySelect = $('input#country');
+        this.citySelect = $('input#city');
+        this.universitySelect = $('input#university');
         this.facultySelect = $('select#faculty');
+        this.teacherSurnameInput = $('input#teacherSurname');
+        this.courseInput = $('input#course');
+        this.subjectInput  = $('input#subject');
         this.searchBtn = $('#search');
+        this.typeSelect = $('select#type');
 
         this.facultySelect.append(this.emptyOption);
         HowToPass.data.faculties.forEach(function(country){
-            this.facultySelect.append('<option value="' + country.value + '">' + country.name + '</option>');
+            this.facultySelect.append('<option value="' + country.id + '">' + country.title + '</option>');
         }.bind(this));
     },
 
@@ -38,8 +42,28 @@ var HowToPass = {
             scope.universitySelect.removeAttr('disabled');
         });*/
 
-        this.searchBtn.click(function() {
+        this.searchBtn.click(this.search.bind(this));
+    },
 
+    search: function () {
+        var examData = {};
+        examData.country = this.countrySelect.val();
+        examData.city = this.citySelect.val();
+        examData.university = this.universitySelect.val();
+        examData.faculty = this.facultySelect.val();
+        examData.teacherSurname = this.teacherSurnameInput.val();
+        examData.course = Number(this.courseInput.val());
+        examData.subject = this.subjectInput.val();
+        examData.type = Number(this.typeSelect.val());
+        $.ajax({
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'text/*, text/html, text/html;level=1, */*'
+            },
+            url: '../../search',
+            dataType: 'json',
+            method: 'POST',
+            data: JSON.stringify(examData)
         });
     },
 

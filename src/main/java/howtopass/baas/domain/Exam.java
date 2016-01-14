@@ -41,6 +41,9 @@ public class Exam {
     @Column(name = "type")
     private Integer type;
 
+    public Exam() {
+    }
+
     public Integer getId() {
         return id;
     }
