@@ -154,7 +154,7 @@ public class Exam {
                 "&country=\"" + country + "\"" +
                 "&city=\"" + city + "\"" +
                 "&faculty=\"" + faculty + "\"" +
-                "&teacherName=\"" + teacherName + "\"" +
+                "&teacherSurname=\"" + teacherSurname + "\"" +
                 "&course=\"" + course + "\"" +
                 "&type=\"" + type + "\"";
     }
