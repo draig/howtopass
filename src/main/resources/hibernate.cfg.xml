@@ -5,7 +5,8 @@
 
 <hibernate-configuration>
 	<session-factory>
-        <property name="hibernate.hbm2ddl.auto">create</property><!-- update create-->
+        <property name="hibernate.hbm2ddl.auto">update</property><!-- update create-->
+        <property name="hibernate.id.new_generator_mappings">true</property>
 		<mapping class="howtopass.baas.domain.Exam" />
 	</session-factory>
 </hibernate-configuration>

@@ -1,11 +1,12 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head lang="en">
-    <link href="../css/bootstrap.css" type="text/css" rel="stylesheet">
-    <link href="../css/bootstrap-theme.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="../js/jquery-2.2.0.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.js"></script>
-    <script type="text/javascript" src="../js/howtopass-search.js"></script>
+    <link href="resources/css/bootstrap.css" type="text/css" rel="stylesheet">
+    <link href="resources/css/bootstrap-theme.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="resources/js/jquery-2.2.0.js"></script>
+    <script type="text/javascript" src="resources/js/bootstrap.js"></script>
+    <script type="text/javascript" src="resources/js/howtopass-search.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title></title>
@@ -30,24 +31,9 @@
     </script>
 </head>
 <body class="container-fluid">
-<form action="../../search" method="post">
+<form action="create" method="post">
     <div class="row htp-search-options">
-        <!--<div class="col-xs-12 col-md-4">
-            <label for="country">Страна:</label>
-            <select class="form-control" id="country">
-            </select>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <label for="city">Город:</label>
-            <select class="form-control" id="city" disabled>
-            </select>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <label for="university">Учебное заведение:</label>
-            <select class="form-control" id="university" disabled>
-            </select>
-        </div>-->
-        <input type="hidden" name="country" id="country" value="belarus">
+        <input type="hidden" name="country" value="belarus">
         <input type="hidden" name="city" value="minsk">
         <input type="hidden" name="university" value="bsu">
         <div class="col-xs-12 col-md-4 readonly-field">
@@ -69,7 +55,7 @@
             <input type="text" class="form-control" required id="teacherSurname" name="teacherSurname"/>
         </div>
         <div class="col-xs-12 col-md-4">
-            <label for="course">Сессия:</label>
+            <label for="course">Курс:</label>
             <input type="number" class="form-control" required id="course" name="course"/>
         </div>
         <div class="col-xs-12 col-md-4">
@@ -78,7 +64,7 @@
         </div>
         <div class="col-xs-12 col-md-4">
             <label for="type">Зачёт/Экзамен</label>
-            <select class="form-control" id="type" name="type">
+            <select class="form-control" required id="type" name="type">
                 <option value="1">Экзамен</option>
                 <option value="2">Зачёт</option>
             </select>
@@ -86,7 +72,7 @@
     </div>
     <div class="row">
         <div class="col-xs12 htp-search">
-            <button type="submit" id="search" class="btn btn-default">Создать</button>
+            <button type="submit" class="btn btn-default">Создать</button>
         </div>
     </div>
 </form>

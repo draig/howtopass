@@ -6,10 +6,10 @@ import javax.persistence.*;
 @Table(name = "exam")
 public class Exam {
 
-    @Id
     @Column(name = "id")
-    @SequenceGenerator(name = "users_seq_gen", sequenceName = "users_id_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq_gen")
+    @SequenceGenerator(name = "exam_id_seq_gen", sequenceName = "exam_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "exam_id_seq_gen")
+    @Id
     private Integer id;
 
     @Column(name = "university", length = 256)
@@ -138,7 +138,7 @@ public class Exam {
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
         final Exam other = (Exam) obj;
-        if(this.getId() == null || other.getId() == null || !this.getId().equals(other)) {
+        if(this.getId() == null || other.getId() == null || !this.getId().equals(other.getId())) {
             return false;
         }
         return true;
@@ -147,6 +147,16 @@ public class Exam {
     @Override
     public int hashCode() {
         return this.id == null ? 0 : this.id.hashCode();
+    }
+
+    public String toQueryString() {
+        return "university=\"" + university + "\"" +
+                "&country=\"" + country + "\"" +
+                "&city=\"" + city + "\"" +
+                "&faculty=\"" + faculty + "\"" +
+                "&teacherName=\"" + teacherName + "\"" +
+                "&course=\"" + course + "\"" +
+                "&type=\"" + type + "\"";
     }
 
 }

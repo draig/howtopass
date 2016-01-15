@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface ExamDAO {
 
-    public Integer addExam(Exam exam);
+    Integer addExam(Exam exam);
 
-    public List<Exam> search(Exam exam);
+    List<Exam> search(Exam exam);
 
-    public Exam exactSearch(Exam exam);
+    Exam exactSearch(Exam exam);
+
+    Exam get(Integer id);
 }

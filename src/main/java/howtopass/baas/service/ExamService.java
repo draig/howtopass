@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface ExamService {
 
-    public List<Exam> search(Exam exam);
+    List<Exam> search(Exam exam);
 
-    public Exam exactSearch(Exam exam);
+    Exam exactSearch(Exam exam);
 
-    public Integer add(Exam exam);
+    Integer add(Exam exam);
+
+    Exam get(Integer id);
 }

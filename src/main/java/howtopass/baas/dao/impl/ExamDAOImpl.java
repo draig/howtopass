@@ -84,6 +84,12 @@ public class ExamDAOImpl implements ExamDAO{
         return searchResult.get(0);
     }
 
+    @Override
+    public Exam get(Integer id) {
+        return (Exam)sessionFactory.getCurrentSession().createCriteria(Exam.class).add(Restrictions.eq("id", id))
+                .list().get(0);
+    }
+
     private List<Exam> removeDuplicate(List<Exam> exams) {
         for(int i = 0; i < exams.size(); ++i) {
             for(int j = i + 1; j < exams.size(); ++j) {

@@ -33,5 +33,9 @@ public class ExamServiceImpl implements ExamService {
         return examDAO.addExam(exam);
     }
 
-
+    @Transactional
+    @Override
+    public Exam get(Integer id){
+        return examDAO.get(id);
+    }
 }
