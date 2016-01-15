@@ -26,46 +26,45 @@ var HowToPass = {
 
     hook: function() {
         var scope = this;
-        /*this.countrySelect.change(function(value) {
-            scope.citySelect.empty().append(scope.emptyOption);
-            HowToPass.data.cities[$(this).val()].forEach(function(city){
-                scope.citySelect.append('<option value="' + city.value + '">' + city.name + '</option>');
-            });
-            scope.citySelect.removeAttr('disabled');
-        });
-
-        this.citySelect.change(function(value) {
-            scope.universitySelect.empty().append(scope.emptyOption);
-            HowToPass.data.cities[$(this).val()].forEach(function(university){
-                scope.citySelect.append('<option value="' + university.value + '">' + university.name + '</option>');
-            });
-            scope.universitySelect.removeAttr('disabled');
-        });*/
-
-        this.searchBtn.click(this.search.bind(this));
+//        this.countrySelect.change(function(value) {
+//            scope.citySelect.empty().append(scope.emptyOption);
+//            HowToPass.data.cities[$(this).val()].forEach(function(city){
+//                scope.citySelect.append('<option value="' + city.value + '">' + city.name + '</option>');
+//            });
+//            scope.citySelect.removeAttr('disabled');
+//        });
+//
+//        this.citySelect.change(function(value) {
+//            scope.universitySelect.empty().append(scope.emptyOption);
+//            HowToPass.data.cities[$(this).val()].forEach(function(university){
+//                scope.citySelect.append('<option value="' + university.value + '">' + university.name + '</option>');
+//            });
+//            scope.universitySelect.removeAttr('disabled');
+//        });
+//        this.searchBtn.click(this.search.bind(this));
     },
 
-    search: function () {
-        var examData = {};
-        examData.country = this.countrySelect.val();
-        examData.city = this.citySelect.val();
-        examData.university = this.universitySelect.val();
-        examData.faculty = this.facultySelect.val();
-        examData.teacherSurname = this.teacherSurnameInput.val();
-        examData.course = Number(this.courseInput.val());
-        examData.subject = this.subjectInput.val();
-        examData.type = Number(this.typeSelect.val());
-        $.ajax({
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'text/*, text/html, text/html;level=1, */*'
-            },
-            url: '../../search',
-            dataType: 'json',
-            method: 'POST',
-            data: JSON.stringify(examData)
-        });
-    },
+//    search: function () {
+//        var examData = {};
+//        examData.country = this.countrySelect.val();
+//        examData.city = this.citySelect.val();
+//        examData.university = this.universitySelect.val();
+//        examData.faculty = this.facultySelect.val();
+//        examData.teacherSurname = this.teacherSurnameInput.val();
+//        examData.course = Number(this.courseInput.val());
+//        examData.subject = this.subjectInput.val();
+//        examData.type = Number(this.typeSelect.val());
+//        $.ajax({
+//            headers: {
+//                'Content-Type': 'application/json',
+//                'Accept': 'text/*, text/html, text/html;level=1, */*'
+//            },
+//            url: '../../search',
+//            dataType: 'json',
+//            method: 'POST',
+//            data: JSON.stringify(examData)
+//        });
+//    },
 
     _disabledFrom: function(select) {
         switch (select) {

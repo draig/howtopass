@@ -8,5 +8,7 @@ public interface ExamDAO {
 
     public Integer addExam(Exam exam);
 
-    public List<Exam> searchExam(Exam exam);
+    public List<Exam> search(Exam exam);
+
+    public Exam exactSearch(Exam exam);
 }

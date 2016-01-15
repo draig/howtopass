@@ -7,11 +7,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Andrew on 1/9/2016.
- */
 @Repository
 public class ExamDAOImpl implements ExamDAO{
     @Autowired
@@ -24,15 +22,76 @@ public class ExamDAOImpl implements ExamDAO{
     }
 
     @Override
-    public List<Exam> searchExam(Exam exam) {
-        return sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.like("country", exam.getCountry()))
-                .add(Restrictions.like("city", exam.getCity()))
-                .add(Restrictions.like("univercity", exam.getUnivercity()))
-                .add(Restrictions.like("teacherSurname", exam.getTeacherSurname()))
-                .add(Restrictions.like("course", exam.getCourse()))
-                .add(Restrictions.like("subject", exam.getSubject()))
-                .add(Restrictions.like("type", exam.getType()))
+    public List<Exam> search(Exam exam) {
+        List<Exam> searchResult = new ArrayList<Exam>();
+        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                .add(Restrictions.eq("country", exam.getCountry()))
+                .add(Restrictions.eq("city", exam.getCity()))
+                .add(Restrictions.eq("university", exam.getUniversity()))
+                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
+                .add(Restrictions.eq("course", exam.getCourse()))
+                .add(Restrictions.eq("subject", exam.getSubject()))
+                .list());
+
+        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                .add(Restrictions.eq("country", exam.getCountry()))
+                .add(Restrictions.eq("city", exam.getCity()))
+                .add(Restrictions.eq("university", exam.getUniversity()))
+                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
+                .add(Restrictions.eq("course", exam.getCourse()))
+                .list());
+
+        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                .add(Restrictions.eq("country", exam.getCountry()))
+                .add(Restrictions.eq("city", exam.getCity()))
+                .add(Restrictions.eq("university", exam.getUniversity()))
+                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
+                .add(Restrictions.eq("subject", exam.getSubject()))
+                .list());
+
+        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                .add(Restrictions.eq("country", exam.getCountry()))
+                .add(Restrictions.eq("city", exam.getCity()))
+                .add(Restrictions.eq("university", exam.getUniversity()))
+                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
+                .list());
+
+        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                .add(Restrictions.eq("country", exam.getCountry()))
+                .add(Restrictions.eq("city", exam.getCity()))
+                .add(Restrictions.eq("university", exam.getUniversity()))
+                .add(Restrictions.eq("course", exam.getCourse()))
+                .add(Restrictions.eq("subject", exam.getSubject()))
+                .list());
+
+        return  removeDuplicate(searchResult);
+    }
+
+    @Override
+    public Exam exactSearch(Exam exam) {
+        List<Exam> searchResult = sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                .add(Restrictions.eq("country", exam.getCountry()))
+                .add(Restrictions.eq("city", exam.getCity()))
+                .add(Restrictions.eq("university", exam.getUniversity()))
+                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
+                .add(Restrictions.eq("course", exam.getCourse()))
+                .add(Restrictions.eq("subject", exam.getSubject()))
+                .add(Restrictions.eq("type", exam.getType()))
                 .list();
+        if(searchResult.size() != 1){
+            return null;
+        }
+        return searchResult.get(0);
+    }
+
+    private List<Exam> removeDuplicate(List<Exam> exams) {
+        for(int i = 0; i < exams.size(); ++i) {
+            for(int j = i + 1; j < exams.size(); ++j) {
+                if(exams.get(i).equals(exams.get(j))) {
+                    exams.remove(j);
+                }
+            }
+        }
+        return  exams;
     }
 }

@@ -8,11 +8,12 @@ public class Exam {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @SequenceGenerator(name = "users_seq_gen", sequenceName = "users_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq_gen")
     private Integer id;
 
-    @Column(name = "univercity", length = 256)
-    private String univercity;
+    @Column(name = "university", length = 256)
+    private String university;
 
     @Column(name = "country", length = 128)
     private String country;
@@ -52,12 +53,12 @@ public class Exam {
         this.id = id;
     }
 
-    public String getUnivercity() {
-        return univercity;
+    public String getUniversity() {
+        return university;
     }
 
-    public void setUnivercity(String univercity) {
-        this.univercity = univercity;
+    public void setUniversity(String university) {
+        this.university = university;
     }
 
     public String getCountry() {
@@ -131,4 +132,21 @@ public class Exam {
     public void setType(Integer type) {
         this.type = type;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        final Exam other = (Exam) obj;
+        if(this.getId() == null || other.getId() == null || !this.getId().equals(other)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id == null ? 0 : this.id.hashCode();
+    }
+
 }

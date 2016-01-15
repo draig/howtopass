@@ -18,7 +18,13 @@ public class ExamServiceImpl implements ExamService {
     @Transactional
     @Override
     public List<Exam> search(Exam exam){
-        return examDAO.searchExam(exam);
+        return examDAO.search(exam);
+    }
+
+    @Transactional
+    @Override
+    public Exam exactSearch(Exam exam) {
+        return examDAO.exactSearch(exam);
     }
 
     @Transactional
@@ -26,4 +32,6 @@ public class ExamServiceImpl implements ExamService {
     public Integer add(Exam exam){
         return examDAO.addExam(exam);
     }
+
+
 }
