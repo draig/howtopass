@@ -1,0 +1,23 @@
+.htp-search, .htp-create {
+    text-align: center;
+    padding: 20px;
+}
+.htp-search-options label {
+    font-size: larger;
+    padding-top: 10px;
+}
+.htp-readonly-field {
+    font-size: large;
+    padding: 10px 15px;
+}
+.container {
+    background: url('../img/background-1-xs.png') no-repeat top center;
+    background-size: contain;
+}
+.htp-content {
+    background: white;
+    padding: 7px;
+    margin-top: 120px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px #888888;
+}
