@@ -5,8 +5,10 @@
 <head lang="en">
     <link href="resources/css/bootstrap.css" type="text/css" rel="stylesheet">
     <link href="resources/css/bootstrap-theme.css" type="text/css" rel="stylesheet">
+    <link href="resources/css/howtopass.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="resources/js/jquery-2.2.0.js"></script>
     <script type="text/javascript" src="resources/js/bootstrap.js"></script>
+    <script type="text/javascript" src="resources/js/howtopass-search.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title></title>
@@ -14,18 +16,16 @@
 
     </style>
 </head>
-<body class="container-fluid">
-<div class="row">
-    <div class="alert alert-warning" role="alert">
+<body class="container">
+<div class="htp-content">
+    <div class="alert alert-warning htp-alert" role="alert">
         <p>Ну удалось найти точного совпадения. Но не огорчайтесь, вы можете создать страницу интересующего
             вас предмета всего за пару минут! Без регистрации и смс.</p>
         <br/>
-        <a class="btn btn-warning" href="search?${createQuery}" role="button">Создать</a>
+        <a class="btn btn-warning" href="create?${createQuery}" role="button">Создать</a>
     </div>
-</div>
 
-<div class="row">
-    <div class="panel panel-default">
+    <div class="panel panel-default simple-feedback-panel">
         <div class="panel-heading">Похожие отзывы</div>
         <ul class="list-group">
             <c:forEach items="${exams}" var="exam">

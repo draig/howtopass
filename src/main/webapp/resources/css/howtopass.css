@@ -21,3 +21,18 @@
     margin-bottom: 20px;
     box-shadow: 0 0 10px #888888;
 }
+
+.htp-content {
+    border-radius: 4px;
+}
+
+.alert.htp-alert{
+    margin: -7px -7px 20px;
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 0 10px #888888;
+}
+
+.panel.simple-feedback-panel {
+    margin: 0 -7px -7px;
+    border-radius: 0 0 4px 4px;
+}

@@ -3,38 +3,47 @@
 <head lang="en">
     <link href="../css/bootstrap.css" type="text/css" rel="stylesheet">
     <link href="../css/bootstrap-theme.css" type="text/css" rel="stylesheet">
+    <link href="../css/howtopass.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="../js/jquery-2.2.0.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/howtopass-search.js"></script>
     <meta charset="UTF-8">
     <script src="http://vk.com/js/api/openapi.js" type="text/javascript" charset="windows-1251"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title></title>
+    <title>HowToPass</title>
     <style>
-        .exam-info {
+        /*.exam-info {
             font-size: 17.5px;
-        }
+        }*/
     </style>
 
 </head>
-<body class="container-fluid">
-<div class="row">
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 exam-info">
-        <p>Беларусь / Минск / БГУ / ФилФак</p>
-        <p>Преподаватель: <strong>Леваков Борис Палвович</strong></p>
-        <p>Предмет: <strong>Математический Анализ</strong></p>
-        <p>Семестр: <span class="label label-default">3</span></p>
-        <p><span class="label label-info">Экзамен</span></p>
+<body class="container">
+    <div class="htp-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 exam-info">
+                <p>Беларусь / Минск / БГУ / ФилФак</p>
+                <p>Преподаватель: <strong>Леваков Борис Палвович</strong></p>
+                <p>Предмет: <strong>Математический Анализ</strong></p>
+                <p>Семестр: <span class="label label-default">3</span></p>
+                <p><span class="label label-info">Экзамен</span></p>
+            </div>
+        </div>
+        <div class="row">
+            <div id="vk_comments"></div>
+        </div>
+        <script type="text/javascript">
+            VK.init({
+                apiId: 5235552,
+                onlyWidgets: true
+            });
+            VK.Widgets.Comments('vk_comments', {
+                pageUrl: 'http://howtopass-letsgo.rhcloud.com/feedback?id',
+                attach: 'photo,link',
+                autoPublish: 0,
+                limit: 100
+            }, 'test');
+        </script>
     </div>
-</div>
-<div class="row">
-    <div id="vk_comments"></div>
-</div>
-<script type="text/javascript">
-    VK.init({
-        apiId: 5034660,
-        onlyWidgets: true
-    });
-    VK.Widgets.Comments('vk_comments', {
-        pageUrl: 'lol.com'
-    }, 'test');
-</script>
 </body>
 </html>
