@@ -5,17 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>HowToPass</title>
     <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
         .htp-header {
             background-color: #FFCC00;
+            text-align: center;
+            display: table;
+            width: 100%;
+            height: 50px;
+        }
+
+        .htp-header-item {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .htp-logo {
+            width: 300px;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            color: #FFFFFF;
+        }
+
+        .htp-header-item-btn {
+            width: 70px;
+        }
+
+        .htp-content {
+            padding: 20px 150px 0;
+        }
+
+        .htp-filter-input {
+            display: inline-block;
+            width: 33%;
+        }
+
+        .htp-filter-input-body {
+            margin: 20px;
+            border: 2px solid #FFCC00;
+            position: relative;
+            width: 300px;
+        }
+
+        .htp-filter-input-icon {
+            margin: 5px;
+        }
+
+        .htp-filter-input-field {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            font-size: 30px;
+            width: 258px;
+            right: 0;
+            left: 42px;
+            border: none;
+            outline: none;
         }
     </style>
 </head>
 <body class="htp-app">
 
     <header class="htp-header">
-        <span class="header-item"><img src="../img/logo.png"/></span>
-        <span class="header-item header-item-left">search</span>
-        <span class="header-item header-item-left">add</span>
+        <!--<span class="header-item"><img src="../img/logo.png"/></span>-->
+        <span class="htp-header-item htp-logo">HowToPass?</span>
+        <span class="htp-header-item htp-header-item-empty"></span>
+        <span class="htp-header-item htp-header-item-btn">search</span>
+        <span class="htp-header-item htp-header-item-btn">add</span>
     </header>
 
     <div class="htp-content">
@@ -23,18 +82,24 @@
         <div class="htp-filter">
 
             <div class="htp-filter-input">
-                <img src="../img/logo.png"/>
-                <input type="text" name="country">
+                <div class="htp-filter-input-body">
+                    <img class="htp-filter-input-icon" src="../img/country.png"/>
+                    <input class="htp-filter-input-field" type="text" name="country" placeholder="Страна">
+                </div>
             </div>
 
             <div class="htp-filter-input">
-                <img src="../img/logo.png"/>
-                <input type="text" name="city">
+                <div class="htp-filter-input-body">
+                    <img class="htp-filter-input-icon" src="../img/city.png"/>
+                    <input class="htp-filter-input-field" type="text" name="city" placeholder="Город">
+                </div>
             </div>
 
             <div class="htp-filter-input">
-                <img src="../img/logo.png"/>
-                <input type="text" name="university">
+                <div class="htp-filter-input-body">
+                    <img class="htp-filter-input-icon" src="../img/university.png"/>
+                    <input class="htp-filter-input-field" type="text" name="university" placeholder="Университет">
+                </div>
             </div>
 
         </div>
