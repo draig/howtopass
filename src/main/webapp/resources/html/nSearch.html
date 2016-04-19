@@ -8,6 +8,7 @@
         body {
             padding: 0;
             margin: 0;
+            position: relative;
         }
         .htp-header {
             background-color: #FFCC00;
@@ -64,8 +65,6 @@
             outline: none;
             padding: 0;
             margin: 0;
-            padding: 0;
-            margin: 0;
         }
 
         .htp-filter-input-field-wrapper {
@@ -79,8 +78,40 @@
         .htp-filter-input-with-img .htp-filter-input-field-wrapper {
             left: 42px;
         }
+
+        .htp-filter-dropdown {
+            position: absolute;
+            width: 302px;
+            border: 1px solid #ccc;
+            background: #FFFFFF;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .htp-filter-dropdown ul {
+            padding: 0 10px;
+            margin: 7px 0;
+        }
+
+        .htp-filter-dropdown ul li {
+            list-style-type: none;
+            text-align: left;
+            font-size: 21px;
+            font-family: Verdana, Geneva, sans-serifsans-serif;
+            cursor: default;
+        }
     </style>
     <script type="text/javascript" src="../js/jquery-2.2.0.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui-core.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui-widget.js"></script>
+    <script type="text/javascript" src="../js/widget/select.js"></script>
+    <script>
+        $(function () {
+            $('#test').select({
+                imageUrl: '../img/university.png',
+                placeholder: 'Университет'
+            });
+        });
+    </script>
 </head>
 <body class="htp-app">
 
@@ -152,7 +183,7 @@
                 <div class="htp-filter-input-body">
                     <img class="htp-filter-input-icon" src="../img/surname.png"/>
                     <div class="htp-filter-input-field-wrapper">
-                        <input class="htp-filter-input-field" type="text" name="surname" placeholder="Фамилия">
+                        <input class="htp-filter-input-field" type="text" name="surname" placeholder="амилия">
                     </div>
                 </div>
             </div>
@@ -164,6 +195,8 @@
                     </div>
                 </div>
             </div>
+
+            <div id="test"/>
 
         </div>
 

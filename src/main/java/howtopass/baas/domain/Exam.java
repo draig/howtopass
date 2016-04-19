@@ -150,13 +150,14 @@ public class Exam {
     }
 
     public String toQueryString() {
-        return "university=\"" + university + "\"" +
-                "&country=\"" + country + "\"" +
-                "&city=\"" + city + "\"" +
-                "&faculty=\"" + faculty + "\"" +
-                "&teacherSurname=\"" + teacherSurname + "\"" +
-                "&course=\"" + course + "\"" +
-                "&type=\"" + type + "\"";
+        return "university=" + university +
+                "&country=" + country +
+                "&city=" + city +
+                "&faculty=" + faculty +
+                "&teacherSurname=" + teacherSurname +
+                "&course=" + course +
+                "&subject=" + subject +
+                "&type=" + type;
     }
 
 }

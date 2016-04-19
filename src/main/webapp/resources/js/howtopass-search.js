@@ -1,9 +1,20 @@
+$.urlParam = function(name) {
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null) {
+        return null;
+    }
+    else {
+        return (results[1] && decodeURI(results[1])) || 0;
+    }
+};
+
 var HowToPass = {
 
     emptyOption: '<option selected disabled style="display: none"></option>',
 
     init: function() {
         this.render();
+        this.setValues();
         this.hook();
     },
 
@@ -22,6 +33,33 @@ var HowToPass = {
         HowToPass.data.faculties.forEach(function(country){
             this.facultySelect.append('<option value="' + country.id + '">' + country.title + '</option>');
         }.bind(this));
+    },
+
+    setValues: function () {
+        var faculty,
+            teacherSurname,
+            course,
+            subject,
+            type;
+        if((faculty = $.urlParam('faculty')) !== null) {
+            this.facultySelect.find('option[value="' + faculty + '"]').attr('selected','');
+        }
+
+        if((teacherSurname = $.urlParam('teacherSurname')) !== null) {
+            this.teacherSurnameInput.prop('value',teacherSurname);
+        }
+
+        if((course = $.urlParam('course')) !== null) {
+            this.courseInput.prop('value', Number(course));
+        }
+
+        if((subject = $.urlParam('subject')) !== null) {
+            this.subjectInput.prop('value', subject);
+        }
+
+        if((type = $.urlParam('type')) !== null) {
+            this.typeSelect.find('option[value="' + type + '"]').attr('selected','');
+        }
     },
 
     hook: function() {
