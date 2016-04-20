@@ -1,12 +1,5 @@
 $.widget( "howtopass.select", {
 
-    // Default options.
-    options: {
-        items: [],
-        imageUrl: '',
-        placeholder: ''
-    },
-
     value: '',
 
     template:   '<div class="htp-filter-input-body">' +
@@ -14,24 +7,20 @@ $.widget( "howtopass.select", {
                     '<div class="htp-filter-input-field-wrapper">' +
                         '<input class="htp-filter-input-field" type="text" name="university" placeholder="">' +
                     '</div>' +
-                    '<div class="htp-filter-input-dropdown"></div>'+
                 '</div>',
 
-    dropdownTemplate:   '<div class="htp-filter-dropdown" style="display: none;">' +
-                            '<div class="htp-filter-no-result-found htp-filter-dropdown-item" style="display: none;">Ничего не найдено</div>' +
-                            '<ul/>' +
-                        '</div>',
-
-    dropdownItemTemplate: '<li class="htp-filter-dropdown-item htp-filter-dropdown-item-visible" value="#{value}">#{text}</li>',
-
     _create: function() {
+        this._buildWidget();
+        this._hookEventListeners();
+        this._postCreate();
+    },
+
+    _buildWidget: function() {
         this.element
             .html(this.template)
-            .addClass('htp-filter-input htp-filter-select')
+            .addClass('htp-filter-input')
             .find('input')
             .attr('placeholder', this.options.placeholder);
-        this.dropdownElement = $(this.dropdownTemplate)
-            .appendTo('body');
         if(this.options.imageUrl) {
             this.element
                 .addClass('htp-filter-input-with-img')
@@ -39,11 +28,10 @@ $.widget( "howtopass.select", {
                 .attr('src', this.options.imageUrl)
                 .show();
         }
-        var scope = this;
-        $.each(this.options.items, function(index, item) {
-            $.tmpl(scope.dropdownItemTemplate, item).appendTo(scope.dropdownElement.find('ul'));
-        });
-        this._hookEventListeners();
+    },
+
+    _postCreate: function() {
+
     },
 
     setText: function(text) {
@@ -96,46 +84,10 @@ $.widget( "howtopass.select", {
         return this;
     },
 
-    _filterDropdownValue: function (searchValue) {
-        var regexp = new RegExp(RegExp.escape(searchValue), 'i');
-        this.dropdownElement
-            .find('li')
-            .addClass('htp-filter-dropdown-item-hidden')
-            .filter(function (index, el) {
-                return regexp.test($(el).text());
-            })
-            .removeClass('htp-filter-dropdown-item-hidden');
-        return this;
-    },
-
     _clear: function() {
         this.element
             .removeClass('htp-filter-input-error')
             .removeClass('htp-filter-input-accept');
-        return this;
-    },
-
-    _checkNoResult: function() {
-        if(!this.dropdownElement.find('li').not('.htp-filter-dropdown-item-hidden').length) {
-            this.dropdownElement.find('.htp-filter-no-result-found').show();
-        } else {
-            this.dropdownElement.find('.htp-filter-no-result-found').hide();
-        }
-        return this;
-    },
-
-    showDropDown: function() {
-        this
-            ._clear()
-            ._filterDropdownValue($('input', this.element).val())
-            ._checkNoResult()
-            ._showDropdown();
-    },
-
-    _showDropdown: function () {
-        var pos = this.element.find('.htp-filter-input-body').offset();
-        pos.top += this.element.find('.htp-filter-input-body').outerHeight() - 2; // minus bottom border size
-        this.dropdownElement.show().offset(pos);
         return this;
     }
 });

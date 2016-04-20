@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>HowToPass</title>
     <style>
-        body {
+        html, body {
             padding: 0;
             margin: 0;
+            height: 100%;
+        }
+
+        body {
             position: relative;
         }
+
         .htp-header {
             background-color: #FFCC00;
             text-align: center;
@@ -51,6 +56,19 @@
             position: relative;
             width: 300px;
             height: 42px;
+            /*transition*/
+            -webkit-transition: border-color 3s ease-in 0s;
+            -moz-transition: border-color 3s ease-in 0s;
+            -o-transition: border-color 3s ease-in 0s;
+            transition: border-color 3s ease-in 0s;
+        }
+
+        .htp-filter-input-accept .htp-filter-input-body {
+            border-color: #33E564;
+        }
+
+        .htp-filter-input-error .htp-filter-input-body {
+            border-color: red;
         }
 
         .htp-filter-input-icon {
@@ -67,6 +85,10 @@
             margin: 0;
         }
 
+        .htp-filter-select .htp-filter-input-field-wrapper {
+            right: 30px;
+        }
+
         .htp-filter-input-field-wrapper {
             position: absolute;
             top: 0;
@@ -79,6 +101,13 @@
             left: 42px;
         }
 
+        .htp-filter-input-dropdown {
+            float: right;
+            height: 100%;
+            width: 30px;
+            background: #f1f1f1 url('../img/drop_down.png') center;
+        }
+
         .htp-filter-dropdown {
             position: absolute;
             width: 302px;
@@ -88,119 +117,181 @@
         }
 
         .htp-filter-dropdown ul {
-            padding: 0 10px;
+            padding: 0;
             margin: 7px 0;
         }
 
-        .htp-filter-dropdown ul li {
+        .htp-filter-dropdown-item {
             list-style-type: none;
             text-align: left;
             font-size: 21px;
             font-family: Verdana, Geneva, sans-serifsans-serif;
             cursor: default;
+            padding: 0 10px;
+        }
+
+        .htp-filter-dropdown-item.htp-filter-dropdown-item-hidden {
+            display: none;
+        }
+
+        .htp-filter-dropdown .htp-filter-no-result-found {
+            text-align: center;
+            padding: 4px 10px 0;
+        }
+
+        .htp-filter-dropdown ul li:hover {
+            background: #eee;
         }
     </style>
     <script type="text/javascript" src="../js/jquery-2.2.0.js"></script>
     <script type="text/javascript" src="../js/jquery-ui-core.js"></script>
     <script type="text/javascript" src="../js/jquery-ui-widget.js"></script>
+    <script type="text/javascript" src="../js/utils.js"></script>
     <script type="text/javascript" src="../js/widget/select.js"></script>
     <script>
         $(function () {
             $('#test').select({
                 imageUrl: '../img/university.png',
-                placeholder: 'Университет'
+                placeholder: 'Университет',
+                items: [
+                    {
+                        text:'БГУ',
+                        value: 'bsu'
+                    },
+                    {
+                        text:'БГМУ',
+                        value: 'bgmu'
+                    },
+                    {
+                        text:'БГУИР',
+                        value: 'bsuir'
+                    },
+                    {
+                        text:'МИТСО',
+                        value: 'mitso'
+                    },
+                    {
+                        text:'БТЭУ',
+                        value: 'bteu'
+                    },
+                    {
+                        text:'БГПУ им. М.Танка',
+                        value: 'maxTankBgpu'
+                    },
+                    {
+                        text:'МГЛУ',
+                        value: 'mglu'
+                    }
+                ]
             });
         });
     </script>
 </head>
 <body class="htp-app">
 
-    <header class="htp-header">
-        <!--<span class="header-item"><img src="../img/logo.png"/></span>-->
-        <span class="htp-header-item htp-logo">HowToPass?</span>
-        <span class="htp-header-item htp-header-item-empty"></span>
-        <span class="htp-header-item htp-header-item-btn">search</span>
-        <span class="htp-header-item htp-header-item-btn">add</span>
-    </header>
+<header class="htp-header">
+    <!--<span class="header-item"><img src="../img/logo.png"/></span>-->
+    <span class="htp-header-item htp-logo">HowToPass?</span>
+    <span class="htp-header-item htp-header-item-empty"></span>
+    <span class="htp-header-item htp-header-item-btn">search</span>
+    <span class="htp-header-item htp-header-item-btn">add</span>
+</header>
 
-    <div class="htp-content">
+<div class="htp-content">
 
-        <div class="htp-filter">
+    <div class="htp-filter">
 
-            <div class="htp-filter-input htp-filter-input-with-img">
-                <div class="htp-filter-input-body">
-                    <img class="htp-filter-input-icon" src="../img/country.png"/>
-                    <div class="htp-filter-input-field-wrapper">
-                        <input class="htp-filter-input-field" type="text" name="country" placeholder="Страна">
-                    </div>
+        <div id="country"/>
+
+        <div id="city"/>
+
+        <div id="university"/>
+
+        <div id="faculty"/>
+
+        <div id="subject"/>
+
+        <div id="course"/>
+
+        <div id="surname"/>
+
+        <div id="type"/>
+
+
+        <!--<div class="htp-filter-input htp-filter-input-with-img">
+            <div class="htp-filter-input-body">
+                <img class="htp-filter-input-icon" src="../img/country.png"/>
+                <div class="htp-filter-input-field-wrapper">
+                    <input class="htp-filter-input-field" type="text" name="country" placeholder="Страна">
                 </div>
             </div>
-
-            <div class="htp-filter-input htp-filter-input-with-img">
-                <div class="htp-filter-input-body">
-                    <img class="htp-filter-input-icon" src="../img/city.png"/>
-                    <div class="htp-filter-input-field-wrapper">
-                        <input class="htp-filter-input-field" type="text" name="city" placeholder="Город">
-                    </div>
-                </div>
-            </div>
-
-            <div class="htp-filter-input htp-filter-input-with-img">
-                <div class="htp-filter-input-body">
-                    <img class="htp-filter-input-icon" src="../img/university.png"/>
-                    <div class="htp-filter-input-field-wrapper">
-                        <input class="htp-filter-input-field" type="text" name="university" placeholder="Университет">
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="htp-filter-input">
-                <div class="htp-filter-input-body">
-                    <div class="htp-filter-input-field-wrapper">
-                        <input class="htp-filter-input-field" type="text" name="faculty" placeholder="Факультет">
-                    </div>
-                </div>
-            </div>
-
-            <div class="htp-filter-input">
-                <div class="htp-filter-input-body">
-                    <div class="htp-filter-input-field-wrapper">
-                        <input class="htp-filter-input-field" type="text" name="subject" placeholder="Предмет">
-                    </div>
-                </div>
-            </div>
-
-            <div class="htp-filter-input">
-                <div class="htp-filter-input-body">
-                    <div class="htp-filter-input-field-wrapper">
-                        <input class="htp-filter-input-field" type="text" name="course" placeholder="Курс">
-                    </div>
-                </div>
-            </div>
-
-            <div class="htp-filter-input htp-filter-input-with-img">
-                <div class="htp-filter-input-body">
-                    <img class="htp-filter-input-icon" src="../img/surname.png"/>
-                    <div class="htp-filter-input-field-wrapper">
-                        <input class="htp-filter-input-field" type="text" name="surname" placeholder="амилия">
-                    </div>
-                </div>
-            </div>
-
-            <div class="htp-filter-input">
-                <div class="htp-filter-input-body">
-                    <div class="htp-filter-input-field-wrapper">
-                        <input class="htp-filter-input-field" type="text" name="type" placeholder="Тип">
-                    </div>
-                </div>
-            </div>
-
-            <div id="test"/>
-
         </div>
 
+        <div class="htp-filter-input htp-filter-input-with-img">
+            <div class="htp-filter-input-body">
+                <img class="htp-filter-input-icon" src="../img/city.png"/>
+                <div class="htp-filter-input-field-wrapper">
+                    <input class="htp-filter-input-field" type="text" name="city" placeholder="Город">
+                </div>
+            </div>
+        </div>
+
+        <div class="htp-filter-input htp-filter-input-with-img">
+            <div class="htp-filter-input-body">
+                <img class="htp-filter-input-icon" src="../img/university.png"/>
+                <div class="htp-filter-input-field-wrapper">
+                    <input class="htp-filter-input-field" type="text" name="university" placeholder="Университет">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="htp-filter-input">
+            <div class="htp-filter-input-body">
+                <div class="htp-filter-input-field-wrapper">
+                    <input class="htp-filter-input-field" type="text" name="faculty" placeholder="Факультет">
+                </div>
+            </div>
+        </div>
+
+        <div class="htp-filter-input">
+            <div class="htp-filter-input-body">
+                <div class="htp-filter-input-field-wrapper">
+                    <input class="htp-filter-input-field" type="text" name="subject" placeholder="Предмет">
+                </div>
+            </div>
+        </div>
+
+        <div class="htp-filter-input">
+            <div class="htp-filter-input-body">
+                <div class="htp-filter-input-field-wrapper">
+                    <input class="htp-filter-input-field" type="text" name="course" placeholder="Курс">
+                </div>
+            </div>
+        </div>
+
+        <div class="htp-filter-input htp-filter-input-with-img">
+            <div class="htp-filter-input-body">
+                <img class="htp-filter-input-icon" src="../img/surname.png"/>
+                <div class="htp-filter-input-field-wrapper">
+                    <input class="htp-filter-input-field" type="text" name="surname" placeholder="амилия">
+                </div>
+            </div>
+        </div>
+
+        <div class="htp-filter-input">
+            <div class="htp-filter-input-body">
+                <div class="htp-filter-input-field-wrapper">
+                    <input class="htp-filter-input-field" type="text" name="type" placeholder="Тип">
+                </div>
+            </div>
+        </div>-->
+
+        <div id="test"/>
+
     </div>
+
+</div>
 
 </body>
 </html>
