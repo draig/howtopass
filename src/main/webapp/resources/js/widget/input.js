@@ -1,4 +1,8 @@
-$.widget( "howtopass.select", {
+$.widget( "howtopass.input", {
+
+    options: {
+        required: false
+    },
 
     value: '',
 
@@ -34,60 +38,25 @@ $.widget( "howtopass.select", {
 
     },
 
-    setText: function(text) {
-        console.log('setText');
-        if(text) {
-            $('input', this.element).val(text);
-            for(var i = 0; i < this.options.items.length; ++i) {
-                if(this.options.items[i].text === text) {
-                    this.element.addClass('htp-filter-input-accept');
-                    return;
-                }
-            }
-            this.element.addClass('htp-filter-input-error');
-        }
-
-    },
-
     _hookEventListeners: function () {
         var scope = this;
         $('input', this.element)
-            .on('input', function() {
-                console.log('input'); //ToDo: add logs
-                scope.showDropDown();
-            })
             .blur(function() {
-                scope._blureTimeout = setTimeout($.proxy(function() {
-                    console.log('blur'); //ToDo: add logs
-                    scope.dropdownElement.hide();
-                    scope
-                        ._clear()
-                        .setText($(this).val());
-                }, this), 1000)
-
+                if(scope.options.required) {
+                    if(!$(this).val()){
+                        scope.element.addClass('htp-filter-input-error');
+                    }
+                }
+            })
+            .focus(function() {
+                scope._clear();
             });
-        $('li', this.dropdownElement).on('click', function() {
-            console.log('li click'); //ToDo: add logs
-            clearTimeout(scope._blureTimeout);
-            scope.setText($(this).text());
-            scope.dropdownElement.hide();
-        });
-        $('.htp-filter-input-dropdown', this.element).on('click', function() {
-            console.log('dropdown click'); //ToDo: add logs
-            clearTimeout(scope._blureTimeout);
-            $('input', scope.element).focus();
-            if(!scope.dropdownElement.is(":visible")) {
-                scope.showDropDown();
-            }
-        });
-
         return this;
     },
 
     _clear: function() {
         this.element
-            .removeClass('htp-filter-input-error')
-            .removeClass('htp-filter-input-accept');
+            .removeClass('htp-filter-input-error');
         return this;
     }
 });
