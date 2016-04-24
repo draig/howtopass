@@ -1,0 +1,213 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    position: relative;
+}
+
+.htp-header {
+    background-color: #FFCC00;
+    text-align: center;
+    display: table;
+    width: 100%;
+    height: 50px;
+}
+
+.htp-header-item {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.htp-logo {
+    width: 300px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    color: #FFFFFF;
+}
+
+.htp-header-item-btn {
+    width: 110px;
+    border-left: 1px solid white;
+    padding: 0 10px;
+    color: #FFFFFF;
+    /*transition*/
+    -webkit-transition: all 2s ease 0s;
+    -moz-transition: all 2s ease 0s;
+    -o-transition: all 2s ease 0s;
+    transition: all 2s ease 0s;
+}
+
+.htp-header-item-btn:hover {
+    background-color: #FFFFFF;
+    color: #FFCC00;
+}
+
+.htp-header-item-btn img {
+    float: left;
+    height: 19px;
+    padding: 5px 6px 0 0;
+}
+
+.htp-header-item-btn span {
+    font-size: 26px;
+
+    float: left;
+}
+
+.htp-content {
+    padding: 20px 150px 0;
+}
+
+.htp-filter-input {
+    display: inline-block;
+    width: 33%;
+}
+
+.htp-filter-input-body {
+    margin: 20px auto;
+    overflow: hidden;
+    border: 2px solid #FFCC00;
+    position: relative;
+    width: 300px;
+    height: 42px;
+    /*transition*/
+    -webkit-transition: border-color 2s ease-in 0s;
+    -moz-transition: border-color 2s ease-in 0s;
+    -o-transition: border-color 2s ease-in 0s;
+    transition: border-color 2s ease-in 0s;
+}
+
+.htp-filter-input-accept .htp-filter-input-body {
+    border-color: #33E564;
+}
+
+.htp-filter-input-error .htp-filter-input-body {
+    border-color: red;
+}
+
+.htp-filter-input-icon {
+    margin: 5px;
+}
+
+.htp-filter-disabled .htp-filter-input-body {
+    background-color: rgb(235, 235, 228);
+}
+
+.htp-filter-disabled .htp-filter-input-field {
+    background-color: rgb(235, 235, 228);
+}
+
+.htp-filter-input-field {
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+}
+
+.htp-filter-select .htp-filter-input-field-wrapper {
+    right: 30px;
+}
+
+.htp-filter-input-field-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 13px;
+}
+
+.htp-filter-input-with-img .htp-filter-input-field-wrapper {
+    left: 42px;
+}
+
+.htp-filter-input-dropdown {
+    float: right;
+    height: 100%;
+    width: 30px;
+    background: #f1f1f1 url('../img/drop_down.png') center;
+}
+
+.htp-filter-disabled .htp-filter-input-dropdown {
+    background-image: url('../img/drop_down_disabled.png');
+}
+
+.htp-filter-input-dropdown:active {
+    background-color: #ccc;
+}
+
+.htp-filter-disabled .htp-filter-input-dropdown {
+    background-color: rgb(235, 235, 228);
+}
+
+.htp-filter-input-dropdown:active {
+    background-color: rgb(235, 235, 228);
+}
+
+.htp-filter-dropdown {
+    position: absolute;
+    width: 302px;
+    border: 1px solid #ccc;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.htp-filter-dropdown ul {
+    padding: 0;
+    margin: 7px 0;
+}
+
+.htp-filter-dropdown-item {
+    list-style-type: none;
+    text-align: left;
+    font-size: 21px;
+    font-family: Verdana, Geneva, sans-serifsans-serif;
+    cursor: default;
+    padding: 0 10px;
+}
+
+.htp-filter-dropdown-item.htp-filter-dropdown-item-hidden {
+    display: none;
+}
+
+.htp-filter-dropdown .htp-filter-no-result-found {
+    text-align: center;
+    padding: 4px 10px 0;
+}
+
+.htp-filter-dropdown ul li:hover {
+    background: #eee;
+}
+
+button {
+    font-size: 30px;
+    line-height: 45px;
+    font-family: Arial, sans-serif;
+    padding: 0 25px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 3px;
+    background: #fff 0 0;
+    transition: .1s ease-out;
+    transition-property: border-color,border-width,background-color;
+    outline: none;
+}
+
+button:hover {
+    border-color: rgba(0, 0, 0, .3);
+}
+
+button:active {
+    background-color: #f3f1ed;
+}
+
+.htp-btn-bar {
+    text-align: center;
+    margin-top: 25px;
+}

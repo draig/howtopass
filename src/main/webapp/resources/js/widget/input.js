@@ -42,11 +42,7 @@ $.widget( "howtopass.input", {
         var scope = this;
         $('input', this.element)
             .blur(function() {
-                if(scope.options.required) {
-                    if(!$(this).val()){
-                        scope.element.addClass('htp-filter-input-error');
-                    }
-                }
+                scope.validate()
             })
             .focus(function() {
                 scope._clear();
@@ -58,5 +54,16 @@ $.widget( "howtopass.input", {
         this.element
             .removeClass('htp-filter-input-error');
         return this;
+    },
+
+    validate: function () {
+        var value = $('input', this.element).val();
+        if(this.options.required) {
+            if(!value){
+                this.element.addClass('htp-filter-input-error');
+                return false;
+            }
+        }
+        return true;
     }
 });

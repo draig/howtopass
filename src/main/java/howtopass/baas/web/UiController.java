@@ -23,7 +23,7 @@ public class UiController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String searchPage() {
+     public String searchPage() {
         return "search";
     }
 

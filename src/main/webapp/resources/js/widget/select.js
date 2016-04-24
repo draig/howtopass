@@ -40,25 +40,69 @@ $.widget( "howtopass.select", {
                 .show();
         }
         var scope = this;
-        $.each(this.options.items, function(index, item) {
-            $.tmpl(scope.dropdownItemTemplate, item).appendTo(scope.dropdownElement.find('ul'));
-        });
+        if(this.options.items.length) {
+            $.each(this.options.items, function(index, item) {
+                $.tmpl(scope.dropdownItemTemplate, item).appendTo(scope.dropdownElement.find('ul'));
+            });
+        } else {
+            this.disable(true);
+        }
+
         this._hookEventListeners();
     },
 
     setText: function(text) {
         console.log('setText');
-        if(text) {
-            $('input', this.element).val(text);
-            for(var i = 0; i < this.options.items.length; ++i) {
-                if(this.options.items[i].text === text) {
-                    this.element.addClass('htp-filter-input-accept');
-                    return;
-                }
-            }
-            this.element.addClass('htp-filter-input-error');
+        $('input', this.element).val(text || '');
+        this.validate();
+
+    },
+
+    refresh: function () {
+
+    },
+
+    disable: function (value) {
+        this._disabled = !!value;
+        $('input', this.element).prop("disabled", !!value);
+        this.element[value ? 'addClass' : 'removeClass']('htp-filter-disabled');
+    },
+
+    reload: function (data) {
+        if(this.options.loadUrl) {
+            $.ajax({
+                url: this.options.loadUrl,
+                type: this.options.loadMethod || "GET",
+                data: data || {},
+                dataType : "json",
+                error : $.proxy(function () {
+                    this.element.trigger('loadError');
+                }, this),
+                success: $.proxy(function (data, textStatus, jqXHR) {
+                    var scope = this;
+                    this.element.trigger('loadSuccess');
+                    $.each(data, function(index, item) {
+                        scope.options.items.push(item);
+                        $.tmpl(scope.dropdownItemTemplate, item).appendTo(scope.dropdownElement.find('ul'));
+                    });
+                    this.disable(false);
+                }, this)
+            });
         }
 
+    },
+
+    validate: function () {
+        var text = $('input', this.element).val();
+        for(var i = 0; i < this.options.items.length; ++i) {
+            if(this.options.items[i].text === text) {
+                this.element.addClass('htp-filter-input-accept');
+                this.element.trigger('valid', this.options.items[i]);
+                return true;
+            }
+        }
+        this.element.addClass('htp-filter-input-error');
+        return false;
     },
 
     _hookEventListeners: function () {
@@ -66,7 +110,7 @@ $.widget( "howtopass.select", {
         $('input', this.element)
             .on('input', function() {
                 console.log('input'); //ToDo: add logs
-                scope.showDropDown();
+                scope.showDropDown(true);
             })
             .blur(function() {
                 scope._blureTimeout = setTimeout($.proxy(function() {
@@ -75,21 +119,25 @@ $.widget( "howtopass.select", {
                     scope
                         ._clear()
                         .setText($(this).val());
-                }, this), 1000)
+                }, this), 400)
 
             });
-        $('li', this.dropdownElement).on('click', function() {
+        this.dropdownElement.on('click','li', function() {
             console.log('li click'); //ToDo: add logs
             clearTimeout(scope._blureTimeout);
-            scope.setText($(this).text());
             scope.dropdownElement.hide();
+            scope.setText($(this).text());
         });
         $('.htp-filter-input-dropdown', this.element).on('click', function() {
-            console.log('dropdown click'); //ToDo: add logs
-            clearTimeout(scope._blureTimeout);
-            $('input', scope.element).focus();
-            if(!scope.dropdownElement.is(":visible")) {
-                scope.showDropDown();
+            if(!scope._disabled) {
+                console.log('dropdown click'); //ToDo: add logs
+                clearTimeout(scope._blureTimeout);
+                $('input', scope.element).focus();
+                if(!scope.dropdownElement.is(":visible")) {
+                    scope.showDropDown();
+                } else {
+                    scope.dropdownElement.hide()
+                }
             }
         });
 
@@ -124,10 +172,10 @@ $.widget( "howtopass.select", {
         return this;
     },
 
-    showDropDown: function() {
+    showDropDown: function(needFilter) {
         this
             ._clear()
-            ._filterDropdownValue($('input', this.element).val())
+            ._filterDropdownValue(needFilter ? $('input', this.element).val() : '')
             ._checkNoResult()
             ._showDropdown();
     },
