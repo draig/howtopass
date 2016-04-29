@@ -1,14 +1,17 @@
 $(function () {
 
+    var engine = {
+        searchPage: {
+            url: 'http://localhost:8085/howtopass/resources/html/result2.html'
+        }
+    };
+
     var country = $('#country').select({
         imageUrl: '../img/country.png',
         placeholder: 'Страна',
         loadUrl: '/howtopass/how-to-pass/country'
     });
 
-    $('#country').on('valid', function (el, data) {
-        $('#city').select('empty').select('reload', {country: data.value});
-    });
     country.select('reload');
 
     $('#city').select({
@@ -17,28 +20,10 @@ $(function () {
         loadUrl: '/howtopass/how-to-pass/city'
     });
 
-    $('#city').on('valid', function (el, data) {
-        var country = $('#country').select('value');
-        $('#university').select('empty').select('reload', {country: country.value, city: data.value});
-        $('#faculty').select('empty').select('disable', true);
-    });
-    $('#city').on('disable', function (el, data) {
-        $('#university').select('empty').select('disable', true);
-    });
-
     $('#university').select({
         imageUrl: '../img/university.png',
         placeholder: 'Университет',
         loadUrl: '/howtopass/how-to-pass/university'
-    });
-
-    $('#university').on('valid', function (el, data) {
-        var country = $('#country').select('value');
-        var city = $('#city').select('value');
-        $('#university').select('empty').select('reload', {country: country.value, city: city.value, university: data.value});
-    });
-    $('#university').on('disable', function (el, data) {
-        $('#faculty').select('faculty').select('disable');
     });
 
     $('#faculty').select({
@@ -52,7 +37,7 @@ $(function () {
     });
 
     $('#semester').select({
-        placeholder: 'Курс',
+        placeholder: 'Семестр',
         type: 'number',
         items: [
             {
@@ -60,7 +45,7 @@ $(function () {
                 value: 1
             },
             {
-                text:'1',
+                text:'2',
                 value: 2
             },
             {
@@ -121,6 +106,81 @@ $(function () {
                 value: 'exam'
             }
         ]
+    });
+
+    engine.searchPage.validate = $.proxy(function() {
+        var result = [];
+        this._block = true;
+        result.push(
+            $('#country').select('validate'),
+            $('#city').select('validate'),
+            $('#university').select('validate'),
+            $('#faculty').select('validate'),
+            $('#semester').select('validate'),
+            $('#type').select('validate'),
+            $('#subject').input('validate'),
+            $('#surname').input('validate')
+        );
+        delete this._block;
+        return $.inArray(false, result) === -1;
+    }, engine.searchPage);
+
+    engine.searchPage.value = $.proxy(function() {
+        return {
+            country: $('#country').select('value').value,
+            city: $('#city').select('value').value,
+            university: $('#university').select('value').value,
+            faculty: $('#faculty').select('value').value,
+            semester: $('#semester').select('value').value,
+            type: $('#type').select('value').value,
+            subject: $('#subject').input('value'),
+            surname: $('#surname').input('value')
+        }
+    }, engine.searchPage);
+
+    engine.searchPage.search = $.proxy(function() {
+        if(this.validate()) {
+            $.relocate(this.url, this.value());
+        }
+    }, engine.searchPage);
+
+    $('#search').on('click', function (el, data) {
+        engine.searchPage.search();
+    });
+
+    $('#country').on('valid', function (el, data) {
+        if(!engine.searchPage._block) {
+            $('#city').select('empty').select('reload', {country: data.value});
+        }
+    });
+    $('#country').on('disable reload', function (el, data) {
+        $('#city').select('empty').select('disable', true);
+    });
+
+    $('#city').on('valid', function (el, data) {
+        if(!engine.searchPage._block) {
+            var country = $('#country').select('value');
+            $('#university').select('empty').select('reload', {country: country.value, city: data.value});
+            $('#faculty').select('empty').select('disable', true);
+        }
+    });
+    $('#city').on('disable reload', function (el, data) {
+        $('#university').select('empty').select('disable', true);
+    });
+
+    $('#university').on('valid', function (el, data) {
+        if(!engine.searchPage._block) {
+            var country = $('#country').select('value');
+            var city = $('#city').select('value');
+            $('#faculty').select('empty').select('reload', {
+                country: country.value,
+                city: city.value,
+                university: data.value
+            });
+        }
+    });
+    $('#university').on('disable reload', function (el, data) {
+        $('#faculty').select('empty').select('disable', true);
     });
 
 });

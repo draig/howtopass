@@ -65,5 +65,9 @@ $.widget( "howtopass.input", {
             }
         }
         return true;
+    },
+
+    value: function() {
+        return $('input', this.element).val();
     }
 });

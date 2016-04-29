@@ -74,10 +74,12 @@ $.widget( "howtopass.select", {
         this.options.items = [];
         this._value = null;
         $('input', this.element).val('');
+        this._clear();
         this.dropdownElement.find('ul').empty();
     },
 
     reload: function (data) {
+        this.element.trigger('reload');
         if(this.options.loadUrl) {
             $.ajax({
                 url: this.options.loadUrl,
@@ -95,13 +97,16 @@ $.widget( "howtopass.select", {
                         $.tmpl(scope.dropdownItemTemplate, item).appendTo(scope.dropdownElement.find('ul'));
                     });
                     this.disable(false);
+                    this._clear();
                 }, this)
             });
         }
-
     },
 
     validate: function () {
+        if($('input', this.element).prop("disabled")) {
+            return true;
+        }
         var text = $('input', this.element).val();
         for(var i = 0; i < this.options.items.length; ++i) {
             if(this.options.items[i].text === text) {
