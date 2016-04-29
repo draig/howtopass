@@ -4,7 +4,8 @@ $.widget( "howtopass.select", {
     options: {
         items: [],
         imageUrl: '',
-        placeholder: ''
+        placeholder: '',
+        type: "text"
     },
 
     value: '',
@@ -47,7 +48,7 @@ $.widget( "howtopass.select", {
         } else {
             this.disable(true);
         }
-
+        $('input', this.element).prop("type", this.options.type);
         this._hookEventListeners();
     },
 
@@ -66,6 +67,14 @@ $.widget( "howtopass.select", {
         this._disabled = !!value;
         $('input', this.element).prop("disabled", !!value);
         this.element[value ? 'addClass' : 'removeClass']('htp-filter-disabled');
+        value && this.element.trigger('disable');
+    },
+
+    empty: function () {
+        this.options.items = [];
+        this._value = null;
+        $('input', this.element).val('');
+        this.dropdownElement.find('ul').empty();
     },
 
     reload: function (data) {
@@ -97,12 +106,18 @@ $.widget( "howtopass.select", {
         for(var i = 0; i < this.options.items.length; ++i) {
             if(this.options.items[i].text === text) {
                 this.element.addClass('htp-filter-input-accept');
-                this.element.trigger('valid', this.options.items[i]);
+                this._value = this.options.items[i];
+                this.element.trigger('valid', this._value);
                 return true;
             }
         }
+        delete this._value;
         this.element.addClass('htp-filter-input-error');
         return false;
+    },
+
+    value: function () {
+        return this._value || null;
     },
 
     _hookEventListeners: function () {

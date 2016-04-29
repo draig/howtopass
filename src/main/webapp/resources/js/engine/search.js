@@ -7,7 +7,7 @@ $(function () {
     });
 
     $('#country').on('valid', function (el, data) {
-        $('#city').select('reload', {country: data.value});
+        $('#city').select('empty').select('reload', {country: data.value});
     });
     country.select('reload');
 
@@ -17,113 +17,110 @@ $(function () {
         loadUrl: '/howtopass/how-to-pass/city'
     });
 
-//            $('#university').select({
-//                imageUrl: '../img/university.png',
-//                placeholder: 'Университет',
-//                items: [
-//                    {
-//                        text:'БГУ',
-//                        value: 'bsu'
-//                    },
-//                    {
-//                        text:'БГМУ',
-//                        value: 'bgmu'
-//                    },
-//                    {
-//                        text:'БГУИР',
-//                        value: 'bsuir'
-//                    },
-//                    {
-//                        text:'МИТСО',
-//                        value: 'mitso'
-//                    },
-//                    {
-//                        text:'БТЭУ',
-//                        value: 'bteu'
-//                    },
-//                    {
-//                        text:'БГПУ им. М.Танка',
-//                        value: 'maxTankBgpu'
-//                    },
-//                    {
-//                        text:'МГЛУ',
-//                        value: 'mglu'
-//                    }
-//                ]
-//            });
-//
-//            $('#faculty').select({
-//                placeholder: 'Факультет',
-//                items: [
-//                    {
-//                        text:'ФПМИ',
-//                        value: 'fpmi'
-//                    },
-//                    {
-//                        text:'Биологический',
-//                        value: 'bio'
-//                    },
-//                    {
-//                        text:'Журналистики',
-//                        value: 'journ'
-//                    }
-//                ]
-//            });
-//
-//            $('#subject').input({
-//                placeholder: 'Предмет',
-//                required: true
-//            });
-//
-//            $('#course').select({
-//                placeholder: 'Курс',
-//                items: [
-//                    {
-//                        text:'1',
-//                        value: 1
-//                    },
-//                    {
-//                        text:'1',
-//                        value: 2
-//                    },
-//                    {
-//                        text:'3',
-//                        value: 3
-//                    },
-//                    {
-//                        text:'4',
-//                        value: 4
-//                    },
-//                    {
-//                        text:'5',
-//                        value: 5
-//                    }
-//                ]
-//            });
-//
-//            $('#subject').input({
-//                imageUrl: '../img/surname.png',
-//                placeholder: 'амилия',
-//                required: true
-//            });
-//
-//            $('#surname').input({
-//                placeholder: 'Фамилия',
-//                required: true
-//            });
-//
-//            $('#type').select({
-//                placeholder: 'Экзамен/зачёт',
-//                items: [
-//                    {
-//                        text: 'Зачёт',
-//                        value: 'credit'
-//                    },
-//                    {
-//                        text: 'Экзамен',
-//                        value: 'exam'
-//                    }
-//                ]
-//            });
+    $('#city').on('valid', function (el, data) {
+        var country = $('#country').select('value');
+        $('#university').select('empty').select('reload', {country: country.value, city: data.value});
+        $('#faculty').select('empty').select('disable', true);
+    });
+    $('#city').on('disable', function (el, data) {
+        $('#university').select('empty').select('disable', true);
+    });
+
+    $('#university').select({
+        imageUrl: '../img/university.png',
+        placeholder: 'Университет',
+        loadUrl: '/howtopass/how-to-pass/university'
+    });
+
+    $('#university').on('valid', function (el, data) {
+        var country = $('#country').select('value');
+        var city = $('#city').select('value');
+        $('#university').select('empty').select('reload', {country: country.value, city: city.value, university: data.value});
+    });
+    $('#university').on('disable', function (el, data) {
+        $('#faculty').select('faculty').select('disable');
+    });
+
+    $('#faculty').select({
+        placeholder: 'Факультет',
+        loadUrl: '/howtopass/how-to-pass/faculty'
+    });
+
+    $('#subject').input({
+        placeholder: 'Предмет',
+        required: true
+    });
+
+    $('#semester').select({
+        placeholder: 'Курс',
+        type: 'number',
+        items: [
+            {
+                text:'1',
+                value: 1
+            },
+            {
+                text:'1',
+                value: 2
+            },
+            {
+                text:'3',
+                value: 3
+            },
+            {
+                text:'4',
+                value: 4
+            },
+            {
+                text:'5',
+                value: 5
+            },
+            {
+                text:'6',
+                value: 6
+            },
+            {
+                text:'7',
+                value: 7
+            },
+            {
+                text:'8',
+                value: 8
+            },
+            {
+                text:'9',
+                value: 9
+            },
+            {
+                text:'10',
+                value: 10
+            }
+        ]
+    });
+
+    $('#subject').input({
+        imageUrl: '../img/surname.png',
+        placeholder: 'амилия',
+        required: true
+    });
+
+    $('#surname').input({
+        placeholder: 'Фамилия',
+        required: true
+    });
+
+    $('#type').select({
+        placeholder: 'Экзамен/зачёт',
+        items: [
+            {
+                text: 'Зачёт',
+                value: 'credit'
+            },
+            {
+                text: 'Экзамен',
+                value: 'exam'
+            }
+        ]
+    });
 
 });

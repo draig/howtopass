@@ -58,5 +58,38 @@ public class RestApiController {
         return selectOptions;
     }
 
+    @RequestMapping(value = "/university", method = RequestMethod.GET)
+    public @ResponseBody List<SelectOptionsDTO> university(@RequestParam("country") String country,
+                                                           @RequestParam("city") String city) {
+        List selectOptions = new ArrayList(){
+            {
+                add(new SelectOptionsDTO("bsu", "БГУ"));
+                add(new SelectOptionsDTO("bgmu", "БГМУ"));
+                add(new SelectOptionsDTO("bsuir", "БГУИР"));
+                add(new SelectOptionsDTO("mitso", "МИТСО"));
+                add(new SelectOptionsDTO("maxTankBgpu", "БГПУ им. М.Танка"));
+                add(new SelectOptionsDTO("mglu", "МГЛУ"));
+            }
+        };
+        return selectOptions;
+    }
+
+    @RequestMapping(value = "/faculty", method = RequestMethod.GET)
+    public @ResponseBody List<SelectOptionsDTO> faculty(@RequestParam("country") String country,
+                                                           @RequestParam("city") String city,
+                                                           @RequestParam("university") String university) {
+        List selectOptions = new ArrayList(){
+            {
+                add(new SelectOptionsDTO("fpmi", "ФПМИ"));
+                add(new SelectOptionsDTO("bio", "Биологический"));
+                add(new SelectOptionsDTO("chem", "Химический"));
+                add(new SelectOptionsDTO("journ", "Институт журналистики"));
+                add(new SelectOptionsDTO("machmat", "Механнико-математический"));
+                add(new SelectOptionsDTO("law", "Юридический"));
+            }
+        };
+        return selectOptions;
+    }
+
 
 }
