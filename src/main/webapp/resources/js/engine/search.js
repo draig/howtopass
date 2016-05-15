@@ -2,7 +2,7 @@ $(function () {
 
     var engine = {
         searchPage: {
-            url: 'http://localhost:8085/howtopass/resources/html/result2.html'
+            url: 'http://localhost:8080/howtopass/resources/html/result2.html'
         }
     };
 
