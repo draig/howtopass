@@ -1,4 +1,4 @@
-package howtopass.baas.web;
+package howtopass.baas.controller;
 
 import howtopass.baas.domain.Exam;
 import howtopass.baas.service.ExamService;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
-import java.util.List;
 
 
 @Controller

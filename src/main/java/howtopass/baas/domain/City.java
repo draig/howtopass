@@ -7,17 +7,21 @@ import java.util.List;
  * Created by Andrew on 4/23/2016.
  */
 @Entity
-@Table(name = "country")
-public class Country {
-    @Column(name = "code")
+@Table(name = "city")
+public class City {
     @Id
+    @Column(name = "code")
     private String code;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id", nullable = false)
+    private Country country;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "city")
+    private List<University> universities;
 
     @Column(name = "name", length = 32)
     private String name;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "country")
-    private List<City> cities;
 
     public String getName() {
         return name;
@@ -35,11 +39,11 @@ public class Country {
         this.code = code;
     }
 
-    public List<City> getCities() {
-        return cities;
+    public List<University> getUniversities() {
+        return universities;
     }
 
-    public void setCities(List<City> cities) {
-        this.cities = cities;
+    public void setUniversities(List<University> universities) {
+        this.universities = universities;
     }
 }

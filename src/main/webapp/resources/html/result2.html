@@ -13,11 +13,20 @@
     <script type="text/javascript" src="../js/widget/select.js"></script>
     <script type="text/javascript" src="../js/engine/search.js"></script>-->
     <style>
+        .htp-content {
+            width: 1000px;
+            margin: auto;
+        }
+        .htp-results {
+            padding: 100px 0 0 0;
+        }
         .htp-result-item {
             padding: 10px;
+            margin: 4px;
             border: 1px solid #e0e0e0;
             box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
             font-size: 18px;
+            float: left;
         }
         .htp-field-label img {
             width: 18px;
@@ -25,16 +34,33 @@
         }
         .htp-field-label {
             padding: 0 5px;
-            color: darkgray;
+        }
+        .htp-type-exam {
+            background: rgb(121, 195, 108);
+            padding: 0 7px 2px;
+            margin-left: 5px;
+            color: white;
         }
         .htp-feedback-btn {
-            margin-top: 10px;
+            margin-top: 0;
         }
-
         .htp-feedback-btn button {
-            font-size: 25px;
-            line-height: 34px;
-            padding: 0 15px;
+            font-size: 18px;
+            line-height: 25px;
+            padding: 0 7px;
+        }
+        .htp-result-info .htp-field-wrapper {
+            width: 50%;
+            margin: auto;
+            float: left;
+            font-size: 26px;
+            text-align: center;
+            padding: 5px 0px;
+        }
+        .htp-result-info .htp-field {
+            width: 400px;
+            margin: auto;
+            border-bottom: 1px solid rgba(0, 0, 0, .2);
         }
     </style>
 </head>
@@ -52,20 +78,108 @@
     </span>-->
 </header>
 <div class="htp-content">
-    <div class="htp-results">
-        <div class="htp-result-item">
-            <div class="htp-field"><span class="htp-field-label"><img src="../img/location.png"  title="Город, страна"/></span><span class="htp-field-value">Минск, Беларусь</span></div>
-            <div class="htp-field"><span class="htp-field-label"><img src="../img/university.png" title="Университет"/></span><span class="htp-field-value">БГУ</span></div>
-            <div class="htp-field"><span class="htp-field-label">Факультет:</span><span class="htp-field-value">Институт журналистики</span></div>
-            <div class="htp-field"><span class="htp-field-label">Предмет:</span><span class="htp-field-value">История журналистики</span></div>
-            <div class="htp-field"><span class="htp-field-label"><img src="../img/person.png" title="Преподаватель"/></span><span class="htp-field-value">История журналистики</span></div>
-            <div class="htp-field"><span class="htp-field-value" style="    background: greenyellow;
-    padding: 0 7px;
-    margin-left: 5px;">экзамен</span></div>
-            <div class="htp-btn-bar htp-feedback-btn">
-                <button>Отзывы</button>
+    <div class="htp-result-info">
+        <div class="htp-field-wrapper">
+            <div class="htp-field">
+                <span class="htp-field-label">
+                    <img src="../img/location.png"  title="Город, страна"/>
+                </span>
+                <span class="htp-field-value">Минск, Беларусь</span>
             </div>
         </div>
+        <div class="htp-field-wrapper">
+            <div class="htp-field">
+                <span class="htp-field-label">
+                    <img src="../img/university.png" title="Университет"/>
+                </span>
+                <span class="htp-field-value">БГУ</span>
+            </div>
+        </div>
+        <div class="htp-field-wrapper" style="width: 100%;">
+            <div class="htp-field" style="width: 900px;">
+                <span class="htp-field-value">Институт журналистики</span>
+            </div>
+        </div>
+    </div>
+    <div class="htp-results">
+        <table>
+            <tr>
+                <td>
+                    <div class="htp-result-item">
+                        <div class="htp-field">
+                            <span class="htp-field-label">Предмет:</span>
+                            <span class="htp-field-value">Математический анализ</span>
+                        </div>
+                        <div class="htp-field">
+                            <span class="htp-field-label">Преподаватель:</span>
+                            <span class="htp-field-value">Дашкевич</span>
+                        </div>
+                        <div class="htp-field">
+                            <span class="htp-field-value htp-type-exam">экзамен</span>
+                        </div>
+                        <div class="htp-btn-bar htp-feedback-btn">
+                            <button>Перейти</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="htp-result-item">
+                        <div class="htp-field">
+                            <span class="htp-field-label">Предмет:</span>
+                            <span class="htp-field-value">Математический анализ</span>
+                        </div>
+                        <div class="htp-field">
+                            <span class="htp-field-label">Преподаватель:</span>
+                            <span class="htp-field-value">Дашкевич</span>
+                        </div>
+                        <div class="htp-field">
+                            <span class="htp-field-value htp-type-exam">экзамен</span>
+                        </div>
+                        <div class="htp-btn-bar htp-feedback-btn">
+                            <button>Перейти</button>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="htp-result-item">
+                        <div class="htp-field">
+                            <span class="htp-field-label">Предмет:</span>
+                            <span class="htp-field-value">Математический анализ</span>
+                        </div>
+                        <div class="htp-field">
+                            <span class="htp-field-label">Преподаватель:</span>
+                            <span class="htp-field-value">Дашкевич</span>
+                        </div>
+                        <div class="htp-field">
+                            <span class="htp-field-value htp-type-exam">экзамен</span>
+                        </div>
+                        <div class="htp-btn-bar htp-feedback-btn">
+                            <button>Перейти</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="htp-result-item">
+                        <div class="htp-field">
+                            <span class="htp-field-label">Предмет:</span>
+                            <span class="htp-field-value">Математический анализ</span>
+                        </div>
+                        <div class="htp-field">
+                            <span class="htp-field-label">Преподаватель:</span>
+                            <span class="htp-field-value">Дашкевич</span>
+                        </div>
+                        <div class="htp-field">
+                            <span class="htp-field-value htp-type-exam">экзамен</span>
+                        </div>
+                        <div class="htp-btn-bar htp-feedback-btn">
+                            <button>Перейти</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>
