@@ -19,6 +19,9 @@ public class Faculty {
     @JoinColumn(name = "university_id", nullable = false)
     private University university;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "exam")
+    private List<Exam> exams;
+
     @Column(name = "name", length = 32)
     private String name;
 
@@ -44,5 +47,10 @@ public class Faculty {
 
     public void setUniversity(University university) {
         this.university = university;
+    }
+
+    @Override
+    public String toString() {
+        return id != null ? id.toString() : "";
     }
 }

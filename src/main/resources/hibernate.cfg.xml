@@ -8,12 +8,13 @@
         <property name="hibernate.hbm2ddl.auto">update</property><!-- update create-->
         <property name="hibernate.id.new_generator_mappings">true</property>
 <!--
-        <property name="hibernate.hbm2ddl.import_files">db/user-initial-data-sql.sql</property>
+        <property name="hibernate.hbm2ddl.import_files">db/htp-initial-data.sql</property>
 -->
 		<mapping class="howtopass.baas.domain.Exam" />
 		<mapping class="howtopass.baas.domain.Country" />
 		<mapping class="howtopass.baas.domain.City" />
 		<mapping class="howtopass.baas.domain.University" />
 		<mapping class="howtopass.baas.domain.Faculty" />
+		<mapping class="howtopass.baas.domain.Type" />
 	</session-factory>
 </hibernate-configuration>

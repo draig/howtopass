@@ -40,11 +40,9 @@
 		p:username="${jdbc.username}" 
 		p:password="${jdbc.password}" />
 
-<!--
     <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="classpath:db/user-initial-data-sql.sql"/>
+        <jdbc:script location="classpath:db/htp-initial-data.sql"/>
     </jdbc:initialize-database>
--->
 
 	<!-- Настройки фабрики сессий Хибернейта -->
 	<bean id="sessionFactory"

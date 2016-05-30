@@ -12,35 +12,19 @@ public class Exam {
     @Id
     private Integer id;
 
-    @Column(name = "university", length = 256)
-    private String university;
-
-    @Column(name = "country", length = 128)
-    private String country;
-
-    @Column(name = "city", length = 128)
-    private String city;
-
-    @Column(name = "faculty", length = 256)
-    private String faculty;
-
-    @Column(name = "teacher_name", length = 32)
-    private String teacherName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "faculty_id", nullable = false)
+    private Faculty faculty;
 
     @Column(name = "teacher_surname", length = 32)
     private String teacherSurname;
 
-    @Column(name = "teacher_middle_name", length = 32)
-    private String teacherMiddleName;
-
-    @Column(name = "course")
-    private Integer course;
-
     @Column(name = "subject", length = 256)
     private String subject;
 
-    @Column(name = "type")
-    private Integer type;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "type_id", nullable = false)
+    private Type type;
 
     public Exam() {
     }
@@ -53,44 +37,12 @@ public class Exam {
         this.id = id;
     }
 
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getFaculty() {
+    public Faculty getFaculty() {
         return faculty;
     }
 
-    public void setFaculty(String faculty) {
+    public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
-    }
-
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
     }
 
     public String getTeacherSurname() {
@@ -101,22 +53,6 @@ public class Exam {
         this.teacherSurname = teacherSurname;
     }
 
-    public String getTeacherMiddleName() {
-        return teacherMiddleName;
-    }
-
-    public void setTeacherMiddleName(String teacherMiddleName) {
-        this.teacherMiddleName = teacherMiddleName;
-    }
-
-    public Integer getCourse() {
-        return course;
-    }
-
-    public void setCourse(Integer course) {
-        this.course = course;
-    }
-
     public String getSubject() {
         return subject;
     }
@@ -125,11 +61,11 @@ public class Exam {
         this.subject = subject;
     }
 
-    public Integer getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -150,12 +86,9 @@ public class Exam {
     }
 
     public String toQueryString() {
-        return "university=" + university +
-                "&country=" + country +
-                "&city=" + city +
-                "&faculty=" + faculty +
+        return
+                "faculty=" + faculty +
                 "&teacherSurname=" + teacherSurname +
-                "&course=" + course +
                 "&subject=" + subject +
                 "&type=" + type;
     }
