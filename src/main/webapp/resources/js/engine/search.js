@@ -76,7 +76,7 @@ $(function () {
     engine.searchPage.search = $.proxy(function() {
         if(this.validate()) {
             $.post(this.url, this.value(), function (data) {
-                    data.location && (window.location.href = 'http://localhost:8080/howtopass/' + data.location);
+                    data.location && (window.location.href = 'http://localhost:8085/howtopass/' + data.location);
                 });
             //$.relocate(this.url, this.value());
         }

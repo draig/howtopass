@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriUtils;
 
-import java.io.IOException;
-
 
 @Controller
 public class UiController {
@@ -27,13 +25,15 @@ public class UiController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public @ResponseBody Redirect search(@ModelAttribute Exam exam, Model model) throws Exception {
+    public @ResponseBody Redirect search(@ModelAttribute Exam exam) throws Exception {
         Exam exactMatch = examService.exactSearch(exam);
         if(exactMatch != null) {
             return new Redirect("feedback?id=" + exactMatch.getId());
         }
         return new Redirect("result?" + UriUtils.encodeQuery(exam.toQueryString(), "UTF-8"));
-        /*if(exactMatch != null) {
+    }
+
+    /*if(exactMatch != null) {
             //model.addAttribute("exam", exactMatch);
             return "redirect:/feedback?id=" + exactMatch.getId();
         }
@@ -44,22 +44,11 @@ public class UiController {
             System.out.println(exception.getMessage());
         }
         return "result";*/
-    }
 
-    class Redirect {
-        String location;
-
-        Redirect(String location) {
-            this.location = location;
-        }
-
-        public String getLocation() {
-            return location;
-        }
-
-        public void setLocation(String location) {
-            this.location = location;
-        }
+    @RequestMapping(value = "/result", method = RequestMethod.GET)
+    public String result(Exam exam, Model model) {
+        model.addAttribute("exams", examService.search(exam));
+        return "result";
     }
 
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
@@ -83,5 +72,21 @@ public class UiController {
             examId = examService.add(exam);
         }
         return "redirect:/feedback?id=" + examId;
+    }
+
+    class Redirect {
+        String location;
+
+        Redirect(String location) {
+            this.location = location;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
     }
 }

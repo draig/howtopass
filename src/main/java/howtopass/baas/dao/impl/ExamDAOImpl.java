@@ -15,6 +15,7 @@ public class ExamDAOImpl implements ExamDAO{
     @Autowired
     private SessionFactory sessionFactory;
 
+    public final int MAX_SEARCH_RESULT = 40;
 
     @Override
     public Integer addExam(Exam exam) {
@@ -25,27 +26,35 @@ public class ExamDAOImpl implements ExamDAO{
     public List<Exam> search(Exam exam) {
         List<Exam> searchResult = new ArrayList<Exam>();
         searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
                 .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
                 .add(Restrictions.eq("subject", exam.getSubject()))
                 .list());
 
         searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
                 .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
                 .list());
 
         searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
+                .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
                 .add(Restrictions.eq("subject", exam.getSubject()))
                 .list());
+        if(searchResult.size() < MAX_SEARCH_RESULT) {
+            if (exam.getTeacherSurname().length() >= 4) {
+                searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                        .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
+                        .add(Restrictions.ilike("teacherSurname", exam.getTeacherSurname().substring(0, 4) + "%"))
+                        .list());
+            }
 
-        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
-                .list());
-
-        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("subject", exam.getSubject()))
-                .list());
-
+            if (exam.getSubject().length() >= 4) {
+                searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                        .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
+                        .add(Restrictions.eq("subject", exam.getSubject().substring(0, 4) + "%"))
+                        .list());
+            }
+        }
         return  removeDuplicate(searchResult);
     }
 
