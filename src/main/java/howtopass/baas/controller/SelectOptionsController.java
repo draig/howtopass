@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/how-to-pass")
+@RequestMapping("/options")
 public class SelectOptionsController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class SelectOptionsController {
     @Autowired
     private SelectOptionsService optionsService;
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/search", method = RequestMethod.GET)
     public @ResponseBody List<Exam> search(@RequestBody Exam searchExam) {
         return examService.search(searchExam);
     }
@@ -31,6 +31,11 @@ public class SelectOptionsController {
     @ResponseStatus(HttpStatus.OK)
     public void add(@RequestBody Exam exam) {
         examService.add(exam);
+    }*/
+
+    @RequestMapping(value = "/type", method = RequestMethod.GET)
+    public @ResponseBody List<SelectOptionsDTO> type() {
+        return optionsService.type();
     }
 
     @RequestMapping(value = "/country", method = RequestMethod.GET)
@@ -39,8 +44,8 @@ public class SelectOptionsController {
     }
 
     @RequestMapping(value = "/city", method = RequestMethod.GET)
-    public @ResponseBody List<SelectOptionsDTO> city(@RequestParam("country") String countryId) {
-        return optionsService.city(countryId);
+    public @ResponseBody List<SelectOptionsDTO> city(@RequestParam("country") String countryCode) {
+        return optionsService.city(countryCode);
     }
 
     @RequestMapping(value = "/university", method = RequestMethod.GET)
@@ -52,7 +57,7 @@ public class SelectOptionsController {
     @RequestMapping(value = "/faculty", method = RequestMethod.GET)
     public @ResponseBody List<SelectOptionsDTO> faculty(@RequestParam("country") String countryCode,
                                                            @RequestParam("city") String cityCode,
-                                                           @RequestParam("university") String universityId) {
+                                                           @RequestParam("university") Integer universityId) {
         return optionsService.faculty(universityId);
     }
 

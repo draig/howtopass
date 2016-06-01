@@ -41,7 +41,7 @@
 		p:password="${jdbc.password}" />
 
     <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="classpath:db/htp-initial-data.sql"/>
+        <jdbc:script encoding="UTF-8" location="classpath:db/htp-initial-data.sql"/>
     </jdbc:initialize-database>
 
 	<!-- Настройки фабрики сессий Хибернейта -->

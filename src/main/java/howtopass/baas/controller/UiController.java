@@ -27,9 +27,13 @@ public class UiController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String search(@ModelAttribute Exam exam, Model model) {
+    public @ResponseBody Redirect search(@ModelAttribute Exam exam, Model model) throws Exception {
         Exam exactMatch = examService.exactSearch(exam);
         if(exactMatch != null) {
+            return new Redirect("feedback?id=" + exactMatch.getId());
+        }
+        return new Redirect("result?" + UriUtils.encodeQuery(exam.toQueryString(), "UTF-8"));
+        /*if(exactMatch != null) {
             //model.addAttribute("exam", exactMatch);
             return "redirect:/feedback?id=" + exactMatch.getId();
         }
@@ -39,7 +43,23 @@ public class UiController {
         } catch (IOException exception) {
             System.out.println(exception.getMessage());
         }
-        return "result";
+        return "result";*/
+    }
+
+    class Redirect {
+        String location;
+
+        Redirect(String location) {
+            this.location = location;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public void setLocation(String location) {
+            this.location = location;
+        }
     }
 
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)

@@ -18,7 +18,7 @@ public class FacultyDAOImpl implements FacultyDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Faculty> get(String universityId){
+    public List<Faculty> get(Integer universityId){
         University university = (University)sessionFactory.getCurrentSession()
                 .createCriteria(University.class)
                 .add(Restrictions.eq("id", universityId))

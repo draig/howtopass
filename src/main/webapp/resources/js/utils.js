@@ -10,13 +10,13 @@ if(!$.tmpl) {
     }
 }
 
+/*
 if(!$.relocate) {
     $.relocate = function (url, queryParams) {
         window.location.href = url + '?' + $.param(queryParams);
     }
 }
-
-
+*/
 
 if(!RegExp.escape) {
     RegExp.escape = function(text) {

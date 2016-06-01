@@ -25,42 +25,24 @@ public class ExamDAOImpl implements ExamDAO{
     public List<Exam> search(Exam exam) {
         List<Exam> searchResult = new ArrayList<Exam>();
         searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("country", exam.getCountry()))
-                .add(Restrictions.eq("city", exam.getCity()))
-                .add(Restrictions.eq("university", exam.getUniversity()))
-                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
-                .add(Restrictions.eq("course", exam.getCourse()))
-                .add(Restrictions.eq("subject", exam.getSubject()))
-                .list());
-
-        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("country", exam.getCountry()))
-                .add(Restrictions.eq("city", exam.getCity()))
-                .add(Restrictions.eq("university", exam.getUniversity()))
-                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
-                .add(Restrictions.eq("course", exam.getCourse()))
-                .list());
-
-        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("country", exam.getCountry()))
-                .add(Restrictions.eq("city", exam.getCity()))
-                .add(Restrictions.eq("university", exam.getUniversity()))
                 .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
                 .add(Restrictions.eq("subject", exam.getSubject()))
                 .list());
 
         searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("country", exam.getCountry()))
-                .add(Restrictions.eq("city", exam.getCity()))
-                .add(Restrictions.eq("university", exam.getUniversity()))
                 .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
                 .list());
 
         searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("country", exam.getCountry()))
-                .add(Restrictions.eq("city", exam.getCity()))
-                .add(Restrictions.eq("university", exam.getUniversity()))
-                .add(Restrictions.eq("course", exam.getCourse()))
+                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
+                .add(Restrictions.eq("subject", exam.getSubject()))
+                .list());
+
+        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
+                .list());
+
+        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
                 .add(Restrictions.eq("subject", exam.getSubject()))
                 .list());
 
@@ -70,13 +52,10 @@ public class ExamDAOImpl implements ExamDAO{
     @Override
     public Exam exactSearch(Exam exam) {
         List<Exam> searchResult = sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("country", exam.getCountry()))
-                .add(Restrictions.eq("city", exam.getCity()))
-                .add(Restrictions.eq("university", exam.getUniversity()))
                 .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
-                .add(Restrictions.eq("course", exam.getCourse()))
                 .add(Restrictions.eq("subject", exam.getSubject()))
-                .add(Restrictions.eq("type", exam.getType()))
+                .add(Restrictions.eq("type.id", exam.getTypeId()))
+                .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
                 .list();
         if(searchResult.size() != 1){
             return null;

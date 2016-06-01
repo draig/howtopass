@@ -6,5 +6,5 @@ import howtopass.baas.domain.University;
 import java.util.List;
 
 public interface FacultyDAO {
-    List<Faculty> get(String universityId);
+    List<Faculty> get(Integer universityId);
 }

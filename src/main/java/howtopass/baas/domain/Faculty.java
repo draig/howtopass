@@ -19,7 +19,7 @@ public class Faculty {
     @JoinColumn(name = "university_id", nullable = false)
     private University university;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "exam")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "faculty")
     private List<Exam> exams;
 
     @Column(name = "name", length = 32)

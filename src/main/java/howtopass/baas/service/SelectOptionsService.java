@@ -14,7 +14,7 @@ public interface SelectOptionsService {
 
     List<SelectOptionsDTO> university(String cityCode);
 
-    List<SelectOptionsDTO> faculty(String universityId);
+    List<SelectOptionsDTO> faculty(Integer universityId);
 
     List<SelectOptionsDTO> type();
 }

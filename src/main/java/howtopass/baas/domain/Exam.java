@@ -16,6 +16,8 @@ public class Exam {
     @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
 
+    private Integer facultyId;
+
     @Column(name = "teacher_surname", length = 32)
     private String teacherSurname;
 
@@ -25,6 +27,8 @@ public class Exam {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "type_id", nullable = false)
     private Type type;
+
+    private String typeId;
 
     public Exam() {
     }
@@ -69,6 +73,22 @@ public class Exam {
         this.type = type;
     }
 
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
+    public Integer getFacultyId() {
+        return facultyId;
+    }
+
+    public void setFacultyId(Integer facultyId) {
+        this.facultyId = facultyId;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) return false;
@@ -87,10 +107,10 @@ public class Exam {
 
     public String toQueryString() {
         return
-                "faculty=" + faculty +
-                "&teacherSurname=" + teacherSurname +
+                "teacherSurname=" + teacherSurname +
                 "&subject=" + subject +
-                "&type=" + type;
+                "&facultyId=" + facultyId +
+                "&typeId=" + typeId;
     }
 
 }
