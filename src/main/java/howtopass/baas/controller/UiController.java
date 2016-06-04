@@ -1,7 +1,9 @@
 package howtopass.baas.controller;
 
 import howtopass.baas.domain.Exam;
+import howtopass.baas.domain.Faculty;
 import howtopass.baas.service.ExamService;
+import howtopass.baas.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import org.springframework.web.util.UriUtils;
 public class UiController {
     @Autowired
     ExamService examService;
+    @Autowired
+    FacultyService facultyService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
@@ -33,21 +37,14 @@ public class UiController {
         return new Redirect("result?" + UriUtils.encodeQuery(exam.toQueryString(), "UTF-8"));
     }
 
-    /*if(exactMatch != null) {
-            //model.addAttribute("exam", exactMatch);
-            return "redirect:/feedback?id=" + exactMatch.getId();
-        }
-        model.addAttribute("exams", examService.search(exam));
-        try {
-            model.addAttribute("createQuery", UriUtils.encodeQuery(exam.toQueryString(), "UTF-8"));
-        } catch (IOException exception) {
-            System.out.println(exception.getMessage());
-        }
-        return "result";*/
-
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     public String result(Exam exam, Model model) {
         model.addAttribute("exams", examService.search(exam));
+        Faculty faculty = facultyService.get(exam.getFacultyId());
+        model.addAttribute("faculty", faculty.getName());
+        model.addAttribute("university", faculty.getUniversity().getName());
+        model.addAttribute("city", faculty.getUniversity().getCity().getName());
+        model.addAttribute("country", faculty.getUniversity().getCity().getCountry().getName());
         return "result";
     }
 

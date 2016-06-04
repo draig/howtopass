@@ -1,10 +1,11 @@
-$(function () {
+var Engine = function (options) {
 
-    var engine = {
+    var engine = $.extend({
         searchPage: {
             url: 'search'
-        }
-    };
+        },
+        rootUrl: 'http://localhost:8085/howtopass/'
+    }, options || {});
 
     var country = $('#country').select({
         imageUrl: 'resources/img/country.png',
@@ -76,9 +77,8 @@ $(function () {
     engine.searchPage.search = $.proxy(function() {
         if(this.validate()) {
             $.post(this.url, this.value(), function (data) {
-                    data.location && (window.location.href = 'http://localhost:8085/howtopass/' + data.location);
+                    data.location && (window.location.href = engine.rootUrl + data.location);
                 });
-            //$.relocate(this.url, this.value());
         }
     }, engine.searchPage);
 
@@ -120,5 +120,4 @@ $(function () {
     $('#university').on('disable reload', function (el, data) {
         $('#faculty').select('empty').select('disable', true);
     });
-
-});
+};

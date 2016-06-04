@@ -139,3 +139,9 @@ INSERT INTO type (id, name)
 INSERT INTO type (id, name)
   SELECT 'credit', 'Зачёт'
   WHERE NOT EXISTS(SELECT id FROM type WHERE id = 'credit');
+
+/*
+INSERT INTO exam(
+            id, faculty_id, type_id, subject, teacher_surname)
+    VALUES (nextval('exam_id_seq'), 4, 'exam', 'математический анализ', 'леваков');
+ */

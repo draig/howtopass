@@ -59,7 +59,9 @@ body {
 }
 
 .htp-content {
-    padding: 20px 150px 0;
+    padding-top: 20px;
+    width: 1000px;
+    margin: auto;
 }
 
 .htp-filter-input {
@@ -70,15 +72,15 @@ body {
 .htp-filter-input-body {
     margin: 20px auto;
     overflow: hidden;
-    border: 2px solid #FFCC00;
+    border: 1px solid #FFCC00;
     position: relative;
     width: 300px;
     height: 42px;
     /*transition*/
-    -webkit-transition: border-color 2s ease-in 0s;
-    -moz-transition: border-color 2s ease-in 0s;
-    -o-transition: border-color 2s ease-in 0s;
-    transition: border-color 2s ease-in 0s;
+    -webkit-transition: border-color 0.5s ease-in 0s;
+    -moz-transition: border-color 0.5s ease-in 0s;
+    -o-transition: border-color 0.5s ease-in 0s;
+    transition: border-color 0.5s ease-in 0s;
 }
 
 .htp-filter-disabled .htp-filter-input-body {
@@ -189,7 +191,7 @@ body {
     background: #eee;
 }
 
-button {
+button, .button {
     font-size: 30px;
     line-height: 45px;
     font-family: Arial, sans-serif;
@@ -201,17 +203,64 @@ button {
     transition: .1s ease-out;
     transition-property: border-color,border-width,background-color;
     outline: none;
+    display: inline-block;
 }
 
-button:hover {
+button:hover, .button:hover {
     border-color: rgba(0, 0, 0, .3);
 }
 
-button:active {
+button:active, .button:active {
     background-color: #f3f1ed;
 }
 
 .htp-btn-bar {
     text-align: center;
     margin-top: 25px;
+}
+
+.htp-results {
+    padding: 100px 0 0 0;
+}
+.htp-result-item {
+    padding: 10px;
+    margin: 4px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+    font-size: 18px;
+    float: left;
+}
+.htp-field-label img {
+    width: 18px;
+    height: 18px;
+}
+.htp-field-label {
+    padding: 0 5px;
+}
+.htp-type-exam {
+    background: rgb(121, 195, 108);
+    padding: 0 7px 2px;
+    margin-left: 5px;
+    color: white;
+}
+.htp-feedback-btn {
+    margin-top: 0;
+}
+.htp-feedback-btn button, .htp-feedback-btn .button {
+    font-size: 18px;
+    line-height: 25px;
+    padding: 0 7px;
+}
+.htp-result-info .htp-field-wrapper {
+    width: 50%;
+    margin: auto;
+    float: left;
+    font-size: 26px;
+    text-align: center;
+    padding: 5px 0px;
+}
+.htp-result-info .htp-field {
+    width: 400px;
+    margin: auto;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
 }

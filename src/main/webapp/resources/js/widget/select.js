@@ -8,6 +8,8 @@ $.widget( "howtopass.select", {
         type: "text"
     },
 
+    BORDER_SIZE: 1,
+
     value: '',
 
     template:   '<div class="htp-filter-input-body">' +
@@ -202,7 +204,7 @@ $.widget( "howtopass.select", {
 
     _showDropdown: function () {
         var pos = this.element.find('.htp-filter-input-body').offset();
-        pos.top += this.element.find('.htp-filter-input-body').outerHeight() - 2; // minus bottom border size
+        pos.top += this.element.find('.htp-filter-input-body').outerHeight() - this.BORDER_SIZE; // minus bottom border size
         this.dropdownElement.show().offset(pos);
         return this;
     }

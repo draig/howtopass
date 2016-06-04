@@ -3,6 +3,7 @@ package howtopass.baas.service.impl;
 import howtopass.baas.dao.ExamDAO;
 import howtopass.baas.domain.Exam;
 import howtopass.baas.service.ExamService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,12 @@ public class ExamServiceImpl implements ExamService {
     @Transactional
     @Override
     public List<Exam> search(Exam exam){
-        return examDAO.search(exam);
+        List<Exam> exams = examDAO.search(exam);
+        for(Exam ex : exams) {
+            Hibernate.initialize(ex.getType());
+            Hibernate.initialize(ex.getType());
+        }
+        return exams;
     }
 
     @Transactional

@@ -48,4 +48,12 @@ public class University {
     public void setFaculties(List<Faculty> faculties) {
         this.faculties = faculties;
     }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
 }

@@ -15,7 +15,7 @@ public class ExamDAOImpl implements ExamDAO{
     @Autowired
     private SessionFactory sessionFactory;
 
-    public final int MAX_SEARCH_RESULT = 40;
+    public final int MAX_SEARCH_RESULT = 10;
 
     @Override
     public Integer addExam(Exam exam) {
@@ -31,15 +31,22 @@ public class ExamDAOImpl implements ExamDAO{
                 .add(Restrictions.eq("subject", exam.getSubject()))
                 .list());
 
-        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
-                .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
-                .list());
+        if (exam.getTeacherSurname().length() >= 4) {
+            searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                    .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
+                    .add(Restrictions.eq("teacherSurname", exam.getTeacherSurname()))
+                    .add(Restrictions.ilike("subject", exam.getSubject().substring(0, 4) + "%"))
+                    .list());
+        }
 
-        searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
-                .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
-                .add(Restrictions.eq("subject", exam.getSubject()))
-                .list());
+        if (exam.getSubject().length() >= 4) {
+            searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)
+                    .add(Restrictions.eq("faculty.id", exam.getFacultyId()))
+                    .add(Restrictions.eq("subject", exam.getSubject()))
+                    .add(Restrictions.ilike("teacherSurname", exam.getTeacherSurname().substring(0, 4) + "%"))
+                    .list());
+        }
+
         if(searchResult.size() < MAX_SEARCH_RESULT) {
             if (exam.getTeacherSurname().length() >= 4) {
                 searchResult.addAll(sessionFactory.getCurrentSession().createCriteria(Exam.class)

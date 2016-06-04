@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="req" value="${pageContext.request}" />
 <!DOCTYPE html>
 <html>
 <head lang="ru">
@@ -14,6 +15,11 @@
     <script type="text/javascript" src="resources/js/widget/input.js"></script>
     <script type="text/javascript" src="resources/js/widget/select.js"></script>
     <script type="text/javascript" src="resources/js/engine/search.js"></script>
+    <script>
+        $(function() {
+            var engine = new Engine();
+        });
+    </script>
 </head>
 <body class="htp-app">
 <header class="htp-header">

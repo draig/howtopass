@@ -1,8 +1,6 @@
 package howtopass.baas.dao.impl;
 
 import howtopass.baas.dao.FacultyDAO;
-import howtopass.baas.dao.UniversityDAO;
-import howtopass.baas.domain.City;
 import howtopass.baas.domain.Faculty;
 import howtopass.baas.domain.University;
 import org.hibernate.SessionFactory;
@@ -18,11 +16,19 @@ public class FacultyDAOImpl implements FacultyDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Faculty> get(Integer universityId){
+    public List<Faculty> getByUniversity(Integer universityId){
         University university = (University)sessionFactory.getCurrentSession()
                 .createCriteria(University.class)
                 .add(Restrictions.eq("id", universityId))
                 .list().get(0);
         return university.getFaculties();
+    }
+
+    @Override
+    public Faculty get(Integer facultyId) {
+        return  (Faculty)sessionFactory.getCurrentSession()
+                .createCriteria(Faculty.class)
+                .add(Restrictions.eq("id", facultyId))
+                .uniqueResult();
     }
 }

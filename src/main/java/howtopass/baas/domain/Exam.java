@@ -16,6 +16,7 @@ public class Exam {
     @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
 
+    @Transient
     private Integer facultyId;
 
     @Column(name = "teacher_surname", length = 32)
@@ -28,6 +29,7 @@ public class Exam {
     @JoinColumn(name = "type_id", nullable = false)
     private Type type;
 
+    @Transient
     private String typeId;
 
     public Exam() {

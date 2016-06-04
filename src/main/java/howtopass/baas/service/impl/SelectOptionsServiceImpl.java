@@ -63,7 +63,7 @@ public class SelectOptionsServiceImpl implements SelectOptionsService {
     @Transactional
     @Override
     public List<SelectOptionsDTO> faculty(Integer universityId) {
-        List<Faculty> faculties = facultyDAO.get(universityId);
+        List<Faculty> faculties = facultyDAO.getByUniversity(universityId);
         List<SelectOptionsDTO> selectOptions = new ArrayList<SelectOptionsDTO>();
         for(Faculty faculty : faculties) {
             selectOptions.add(new SelectOptionsDTO(faculty));
