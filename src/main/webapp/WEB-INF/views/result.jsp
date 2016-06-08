@@ -49,6 +49,10 @@
             </div>
         </div>
     </div>
+    <div class="result-panel">
+        <p>Ничего не нашли? Тогда создейте в один клик!</p>
+        <button>Создать</button>
+    </div>
     <div class="htp-results">
         <c:forEach items="${exams}" var="exam">
             <div class="htp-result-item-wrapper">

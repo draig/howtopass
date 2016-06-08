@@ -204,6 +204,8 @@ button, .button {
     transition-property: border-color,border-width,background-color;
     outline: none;
     display: inline-block;
+    text-decoration: none;
+    color: #000000;
 }
 
 button:hover, .button:hover {
@@ -219,9 +221,10 @@ button:active, .button:active {
     margin-top: 25px;
 }
 
-.htp-results {
+/*.htp-results {
     padding: 100px 0 0 0;
-}
+}*/
+
 .htp-result-item {
     padding: 10px;
     margin: 4px;
@@ -263,4 +266,52 @@ button:active, .button:active {
     width: 400px;
     margin: auto;
     border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.htp-result-info {
+    overflow: hidden;
+}
+
+.htp-feedback-info .htp-field-wrapper {
+    width: 100%;
+    margin: auto;
+    font-size: 18px;
+    text-align: center;
+    padding: 9px 0px;
+}
+
+.htp-feedback-info .htp-field-wrapper:first-child {
+    padding-top: 25px;
+}
+
+.htp-feedback-info .htp-field {
+    width: 250px;
+    margin: auto;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.htp-feedback-info {
+    overflow: hidden;
+}
+
+.result-panel {
+    background-color: rgb(247, 247, 249);
+    padding: 6px 6px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.result-panel p {
+    padding: 0;
+    margin: 0;
+    font-size: 19px;
+    float: left;
+    line-height: 30px;
+}
+
+.result-panel button {
+    font-size: 19px;
+    line-height: 29px;
+    float: right;
 }

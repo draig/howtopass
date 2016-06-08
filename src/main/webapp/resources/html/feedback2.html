@@ -16,6 +16,25 @@
         .htp-content {
             width: 1000px;
             margin: auto;
+            height: 100%;
+            padding-top: 0;
+            overflow: hidden;
+        }
+        .htp-content-wrapper {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            top: 54px;
+        }
+        .htp-feedback-info {
+            width: 30%;
+            height: 100%;
+            display: inline-block;
+        }
+        .htp-vk-feedback {
+            width: 60%;
+            height: 100%;
+            display: inline-block;
         }
     </style>
 </head>
@@ -24,12 +43,67 @@
     <span class="htp-header-item" style="width: 250px;"><img src="../img/logo.png"/></span>
     <span class="htp-header-item htp-header-item-empty"></span>
 </header>
-<div class="htp-content">
-    <div class="htp-feedback-info">
+<div class="htp-content-wrapper">
+    <div class="htp-content">
+        <div class="htp-feedback-info">
+            <div class="htp-field-wrapper">
+                <div class="htp-field-wrapper">
+                    <div class="htp-field">
+                        <span class="htp-field-label">
+                            <img src="../img/country.png"  title="Страна"/>
+                        </span>
+                        <span class="htp-field-value">Беларусь</span>
+                    </div>
+                </div>
+                <div class="htp-field-wrapper">
+                    <div class="htp-field">
+                        <span class="htp-field-label">
+                            <img src="../img/city.png" title="Город"/>
+                        </span>
+                        <span class="htp-field-value">Минск</span>
+                    </div>
+                </div>
+                <div class="htp-field-wrapper">
+                    <div class="htp-field">
+                        <span class="htp-field-label">
+                            <img src="../img/university.png" title="Университет"/>
+                        </span>
+                        <span class="htp-field-value">БГУ</span>
+                    </div>
+                </div>
+                <div class="htp-field-wrapper">
+                    <div class="htp-field">
+                        <span class="htp-field-label">
+                            Факультет:
+                        </span>
+                        <span class="htp-field-value">Биологический</span>
+                    </div>
+                </div>
+                <div class="htp-field-wrapper">
+                    <div class="htp-field">
+                        <span class="htp-field-label">
+                            Предмет:
+                        </span>
+                        <span class="htp-field-value">Биосинтез белков</span>
+                    </div>
+                </div>
+                <div class="htp-field-wrapper">
+                    <div class="htp-field">
+                        <span class="htp-field-label">
+                            Преподаватель:
+                        </span>
+                        <span class="htp-field-value">Дашкевич</span>
+                    </div>
+                </div>
+                <div class="htp-field-wrapper">
+                    <div class="htp-field">
+                        <span class="htp-field-value">Зачёт</span>
+                    </div>
+                </div>
+            </div>
+        <div class="htp-vk-feedback">
 
-    </div>
-    <div class="htp-vk-feedback">
-
+        </div>
     </div>
 </div>
 </body>
