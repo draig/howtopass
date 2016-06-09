@@ -3,8 +3,7 @@ var Engine = function (options) {
     var engine = $.extend({
         searchPage: {
             url: 'search'
-        },
-        rootUrl: 'http://localhost:8085/howtopass/'
+        }
     }, options || {});
 
     var country = $('#country').select({
@@ -77,7 +76,7 @@ var Engine = function (options) {
     engine.searchPage.search = $.proxy(function() {
         if(this.validate()) {
             $.post(this.url, this.value(), function (data) {
-                    data.location && (window.location.href = engine.rootUrl + data.location);
+                    data.location && $.relocate(data.location);
                 });
         }
     }, engine.searchPage);

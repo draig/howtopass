@@ -10,13 +10,18 @@ if(!$.tmpl) {
     }
 }
 
-/*
 if(!$.relocate) {
     $.relocate = function (url, queryParams) {
-        window.location.href = url + '?' + $.param(queryParams);
+        var path = window.location.href;
+        path = path.substr(0, path.lastIndexOf("/") + 1) + url;
+        if (queryParams) {
+            window.location.href = path + (path.indexOf('?') === -1 ? '?' : '&') + $.param(queryParams);
+        } else {
+            window.location.href = path
+        }
+
     }
 }
-*/
 
 if(!RegExp.escape) {
     RegExp.escape = function(text) {
