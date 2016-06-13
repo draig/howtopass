@@ -10,12 +10,21 @@ if(!$.tmpl) {
     }
 }
 
+/*
+* @options property:
+* @queryParams default {}
+* @transitQueryParams default false
+*
+* */
 if(!$.relocate) {
-    $.relocate = function (url, queryParams) {
-        var path = window.location.href;
-        path = path.substr(0, path.lastIndexOf("/") + 1) + url;
-        if (queryParams) {
-            window.location.href = path + (path.indexOf('?') === -1 ? '?' : '&') + $.param(queryParams);
+    $.relocate = function (url, options) {
+        var href = window.location.href, path;
+        path = href.substr(0, href.lastIndexOf("/") + 1) + url;
+        if(options.transitQueryParams) {
+            path += href.substr(href.indexOf("?"));
+        }
+        if (options.queryParams) {
+            window.location.href = path + (path.indexOf('?') === -1 ? '?' : '&') + $.param(options.queryParams);
         } else {
             window.location.href = path
         }

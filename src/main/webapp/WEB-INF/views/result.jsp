@@ -11,6 +11,12 @@
     <script type="text/javascript" src="resources/js/jquery-ui-core.js"></script>
     <script type="text/javascript" src="resources/js/jquery-ui-widget.js"></script>
     <script type="text/javascript" src="resources/js/utils.js"></script>
+    <script type="text/javascript" src="resources/js/engine/result.js"></script>
+    <script>
+        $(function() {
+            var engine = new Engine();
+        });
+    </script>
 </head>
 <body class="htp-app">
 <header class="htp-header">
@@ -51,7 +57,7 @@
     </div>
     <div class="result-panel">
         <p>Ничего не нашли? Тогда создейте в один клик!</p>
-        <button>Создать</button>
+        <button id="create">Создать</button>
     </div>
     <div class="htp-results">
         <c:forEach items="${exams}" var="exam">

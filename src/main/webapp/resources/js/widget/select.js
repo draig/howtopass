@@ -61,6 +61,25 @@ $.widget( "howtopass.select", {
 
     },
 
+    /*
+    * @options property:
+    * @success <function> call if id set correct
+    * @error <function> call if id set fail
+    * */
+    setId: function (id) {
+        for(var i = 0; i < this.options.items.length; ++i) {
+            if(this.options.items[i].id === id) {
+                this.element.addClass('htp-filter-input-accept');
+                this._value = this.options.items[i];
+                this.element.trigger('valid', this._value);
+                return true;
+            }
+        }
+        delete this._value;
+        this.element.addClass('htp-filter-input-error');
+        return false;
+    },
+
     refresh: function () {
 
     },
@@ -93,13 +112,13 @@ $.widget( "howtopass.select", {
                 }, this),
                 success: $.proxy(function (data, textStatus, jqXHR) {
                     var scope = this;
-                    this.element.trigger('loadSuccess');
                     $.each(data, function(index, item) {
                         scope.options.items.push(item);
                         $.tmpl(scope.dropdownItemTemplate, item).appendTo(scope.dropdownElement.find('ul'));
                     });
                     this.disable(false);
                     this._clear();
+                    this.element.trigger('loadSuccess');
                 }, this)
             });
         }
