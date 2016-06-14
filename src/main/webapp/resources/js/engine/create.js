@@ -12,7 +12,12 @@ var Engine = function (options) {
         loadUrl: '/howtopass/options/country'
     });
 
-    country.one
+    country.one('loadSuccess', function() {
+        var countryId = $.urlParam('country');
+        if(countryId) {
+            country.select('setId', countryId);
+        }
+    });
     country.select('reload');
 
     $('#city').select({

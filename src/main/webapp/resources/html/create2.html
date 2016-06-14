@@ -12,6 +12,7 @@
     <script type="text/javascript" src="../js/widget/input.js"></script>
     <script type="text/javascript" src="../js/widget/select.js"></script>
     <script type="text/javascript" src="../js/engine/create.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
         $(function() {
             var engine = new Engine();
@@ -42,8 +43,11 @@
             <div id="surname"></div>
             <div id="type"></div>
         </div>
+        <form>
+            <div class="g-recaptcha" data-sitekey="6LdxkCITAAAAACqYY3kJsmhplyvf_CDAEc0fxsb8"></div>
+        </form>
         <div class="htp-btn-bar">
-            <button id="search">Поиск</button>
+            <button id="search">Создать</button>
         </div>
     </div>
 </body>
