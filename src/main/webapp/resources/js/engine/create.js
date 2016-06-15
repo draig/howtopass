@@ -64,7 +64,8 @@ var Engine = function (options) {
             $('#faculty').select('validate'),
             $('#type').select('validate'),
             $('#subject').input('validate'),
-            $('#surname').input('validate')
+            $('#surname').input('validate'),
+            grecaptcha.getResponse() || false
         );
         delete this._block;
         return $.inArray(false, result) === -1;
